@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="32" height="32" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="tiles" tilewidth="16" tileheight="16">
+  <image source="tiles.png" width="800" height="600"/>
+ </tileset>
+ <tileset firstgid="1851" name="char-1" tilewidth="16" tileheight="16">
+  <image source="char-1.png" width="800" height="600"/>
+ </tileset>
+ <tileset firstgid="3701" name="gameplay-tiles" tilewidth="16" tileheight="16">
+  <image source="gameplay-tiles.png" width="800" height="600"/>
+ </tileset>
+ <tileset firstgid="5551" name="quest-tiles" tilewidth="16" tileheight="16">
+  <image source="quest-tiles.png" width="64" height="16"/>
+ </tileset>
+ <layer name="tiles" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3RuRGAMBTEUCcGOuLoiKMjMLWi+BPbBGhnFGz8ckqpo54GypV/3EgTzbQ0+HErbbTT0eDHnXRRobvBj6vtrb/++uuvv/76v6e//vrr/5W/+/cex7nN/wAQAAA=
+  </data>
+ </layer>
+ <layer name="features" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+2VCwqDMAyGW3ckzzS2K7kr+ZgXci4DAyEk1kdSYfSDYFur7Z9HG8I6deK9N/cL1nyAPcn6tI+8he+ksa2MpN2AvZZ2zfq58fZ/BXYjVrFnFMbw6UUq/lKcR2HsKFfFfyBtrHse/z7DPui6e84fy71p+n/MwS7eWv7HoOd/Cg8/5ECqK8n/LVjnvBdE0j+BfZT5Z+4Aidz3H88dqt9a2xZS+r3PoyP5b3kXoP5hddZ5tJrS9FvnAtYUPw/jzv9Y+r5QKBT+mS/Z85bbABAAAA==
+  </data>
+ </layer>
+ <layer name="characters" width="32" height="32" visible="0">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3TsQkAIBADwO9+KF1J9y91AG1V5K5NEQgkYq1kRM1NeECb3f1iP7zCF++wOwAAvxnfKeMtABAAAA==
+  </data>
+ </layer>
+ <layer name="gameplay" width="32" height="32" visible="0" opacity="0.57">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAAyvlY2AoxYPLCchTA1cNsP3ouAyKYfYj8+llfwWa/RV0tJ+e4V9OASYnPY3GP2nxPhD5byTZT810T8twGCiMzX5S8yMl5QE2+yuheLiE/2Crf0ftp7/9uPIUveyH5amBLu9GMWFMaftqFI/iUTw4MAAorRaeABAAAA==
+  </data>
+ </layer>
+ <layer name="quests" width="32" height="32" visible="0" opacity="0.68">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3RuQ0AIAwEQTfh/kvgqZDYiIwEoZnspMs2ghfNrHvk+cef+ta76Q8AAFxay0STuwAQAAA=
+  </data>
+ </layer>
+</map>
