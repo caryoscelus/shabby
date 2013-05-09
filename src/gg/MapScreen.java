@@ -125,6 +125,11 @@ public class MapScreen implements Screen, StoryScreen {
         labelStyle.fontColor = Color.DARK_GRAY;
         labelStyle.background = skin.newDrawable("white", Color.LIGHT_GRAY);
         skin.add("default", labelStyle);
+        
+        Window.WindowStyle windowStyle = new Window.WindowStyle();
+        windowStyle.titleFont = skin.getFont("default");
+        windowStyle.background = skin.newDrawable("white", Color.LIGHT_GRAY);
+        skin.add("default", windowStyle);
     }
     
     @Override
@@ -219,13 +224,17 @@ public class MapScreen implements Screen, StoryScreen {
     }
     
     void setupStoryStageUi (StoryDialog dialogue) {
-        Stack stack = new Stack();
+//         Stack stack = new Stack();
+//         stack.setFillParent(true);
         
-        WidgetGroup table = new VerticalGroup();
+        Table table = new Table();
         table.setFillParent(true);
         
+        Window window = new Window("text", skin);
+        window.setFillParent(true);
+        
         final Label label = new Label(dialogue.text, skin);
-        table.addActor(label);
+        window.add(label).space(2);
         
         // dialogue options
         for (Map.Entry<String, StoryEvent> entry : dialogue.options.entrySet()) {
@@ -241,17 +250,13 @@ public class MapScreen implements Screen, StoryScreen {
                     }
                 }
             });
-            table.addActor(button);
+            window.row();
+            window.add(button).width(256).space(2);
         }
         
-        Image background = new Image(skin.newDrawable("white", Color.LIGHT_GRAY));
-        background.setScaling(Scaling.stretch);
-        stack.add(background);
-        stack.add(table);
+        table.add(window).expand();
         
-        storyStage.addActor(stack);
-        stack.setPosition(storyStage.getWidth()/3, storyStage.getHeight()*2/3);
-        stack.setSize(storyStage.getWidth()/3, storyStage.getHeight()/3);
+        storyStage.addActor(table);
     }
     
     @Override
