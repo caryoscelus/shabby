@@ -30,15 +30,35 @@ public class Person extends StoryObject {
     
     public static final int FIRST_TID_QUEST = 5551;
     
-    static final float DEFAULT_SPEED = 8;
+    static final float DEFAULT_SPEED = 4;
     static final float ROAD_BOOST = 1.5f;
     
     // gfx
-    TextureRegion reg;
+    Texture texture;
+    Animation defaultSprite;
+    Animation[] spriteRun = new Animation[8];
+    Animation[] spriteStand = new Animation[8];
+    int direction = 0;
+    enum State {
+        Stand, Run
+    }
+    State state = State.Stand;
     float tc;
     
     public Person () {
-        reg = new TextureRegion(new Texture("data/maps/char-1.png"), 32, 32);
+        texture = new Texture("data/maps/char-1.png");
+        TextureRegion[][] regions = TextureRegion.split(texture, 32, 32);
+        
+        defaultSprite = new Animation(0, regions[0][0]);
+        
+        for (int i = 0; i < 8; ++i) {
+            spriteStand[i] = new Animation(0, regions[i+1][0]);
+            
+            TextureRegion[] tmp = new TextureRegion[8];
+            System.arraycopy(regions[i+1], 1, tmp, 0, 8);
+            spriteRun[i] = new Animation(0.11f, tmp);
+            spriteRun[i].setPlayMode(Animation.LOOP);
+        }
     }
     
     public void moveTo (TiledMap map, Vector2 xy) {
@@ -47,8 +67,16 @@ public class Person extends StoryObject {
     }
     
     public void render (SpriteBatch batch) {
+        final Animation[] spriteT;
+        if (state == State.Run) {
+            spriteT = spriteRun;
+        } else {
+            spriteT = spriteStand;
+        }
+        final Animation sprite = spriteT[direction];
+        
         batch.begin();
-        batch.draw(reg, position.x, position.y, 2, 2);
+        batch.draw(sprite.getKeyFrame(tc), position.x, position.y, 2, 2);
         batch.end();
     }
     
@@ -56,12 +84,13 @@ public class Person extends StoryObject {
         // fur animations
         tc += dt;
         
-        
-        
         if (move.x != 0 || move.y != 0) {
             int angle = ((int) move.angle()/45) * 45;
             float dx = (float) Math.cos(angle*Math.PI/180) * dt * DEFAULT_SPEED;
             float dy = (float) Math.sin(angle*Math.PI/180) * dt * DEFAULT_SPEED;
+            
+            direction = angle / 45;
+            state = State.Run;
             
             // check ground
             TiledMapTile tile;
@@ -92,6 +121,8 @@ public class Person extends StoryObject {
             
             position.x += dx;
             position.y += dy;
+        } else {
+            state = State.Stand;
         }
     }
     

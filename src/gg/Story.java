@@ -1,7 +1,6 @@
 package gg;
 
 import com.badlogic.gdx.Gdx;
-// import com.badlogic.gdx.Screen;
 
 import java.util.Map;
 import java.util.HashMap;
