@@ -1,15 +1,15 @@
 (ns story)
 
-(import '(gg Story StoryEvent Dialogue)
+(import '(gg Story StoryEvent StoryDialog)
         '(java.util HashMap))
 
 (defn show-text [text]
-      (let [dialogue (Dialogue. text)]
+      (let [dialogue (StoryDialog. text)]
            (fn []
                (.ui (Story/instance) dialogue))))
 
 (defn show-dialogue [text options]
-      (let [dialogue (Dialogue. text (HashMap. options))]
+      (let [dialogue (StoryDialog. text (HashMap. options))]
            (fn []
                (.ui (Story/instance) dialogue))))
 

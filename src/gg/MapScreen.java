@@ -215,7 +215,7 @@ public class MapScreen implements Screen, StoryScreen {
         }
     }
     
-    void setupStoryStageUi (Dialogue dialogue) {
+    void setupStoryStageUi (StoryDialog dialogue) {
         Stack stack = new Stack();
         
         WidgetGroup table = new VerticalGroup();
@@ -252,7 +252,7 @@ public class MapScreen implements Screen, StoryScreen {
     }
     
     @Override
-    public void showStory (Dialogue dialogue) {
+    public void showStory (StoryDialog dialogue) {
         showStory = true;
         
         setupStoryStageUi(dialogue);

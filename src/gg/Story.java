@@ -59,7 +59,7 @@ public class Story {
     }
     
     
-    public void ui (Dialogue dialogue) {
+    public void ui (StoryDialog dialogue) {
         if (screen != null) {
             screen.showStory(dialogue);
         }

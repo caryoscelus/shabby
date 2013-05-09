@@ -2,11 +2,11 @@ package gg;
 
 import java.util.HashMap;
 
-public class Dialogue {
+public class StoryDialog {
     public final String text;
     public final HashMap <String, StoryEvent> options;
     
-    public Dialogue (String t) {
+    public StoryDialog (String t) {
         text = t;
         options = new HashMap();
         options.put("Close", new StoryEvent() {
@@ -16,7 +16,7 @@ public class Dialogue {
         });
     }
     
-    public Dialogue (String t, HashMap<String, StoryEvent> opts) {
+    public StoryDialog (String t, HashMap<String, StoryEvent> opts) {
         text = t;
         options = opts;
     }

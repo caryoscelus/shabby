@@ -5,7 +5,7 @@
 ;; name should be unique and can be used to call this event manually
 (bind 0 "Hello" (txt "Hello, world"))
 (bind 1 "Clojure" (txt "Hello from Clojure"))
-(bind 2 "Dialogue"
+(bind 2 "StoryDialog"
       (dia
           ;; initial text
           "Do you like coffee?"
