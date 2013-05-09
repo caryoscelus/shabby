@@ -92,6 +92,9 @@ public class MapScreen implements Screen, StoryScreen {
         } catch (IOException e) {
             Gdx.app.error("clojure", "can't find file", e);
         }
+        
+        // show help
+        Story.instance().trigger("help");
     }
     
     void initUiSkins () {

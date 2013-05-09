@@ -21,3 +21,18 @@
 Really big
 And even bigger!!!
 Some very long string to check wrapping.. Hopefully it won't be borked"))
+
+
+
+;; help
+(bind -1 "help" (txt
+"Welcome to Shabby!
+Currently this is story-only game. You should move around, find places,
+read story and use dialogs.
+
+Controls:
+[arrows] - moving
+[space]  - activate feature
+[f1]     - call this help
+
+Good luck!"))
