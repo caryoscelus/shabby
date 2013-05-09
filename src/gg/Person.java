@@ -73,6 +73,11 @@ public class Person extends StoryObject {
         } else {
             spriteT = spriteStand;
         }
+        // fix this when all animations are done
+        if (direction % 4 == 3) {
+            direction = (direction+1)%8;
+        }
+        direction = direction/2*2;
         final Animation sprite = spriteT[direction];
         
         batch.begin();
