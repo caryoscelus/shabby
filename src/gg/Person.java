@@ -16,8 +16,8 @@ public class Person extends StoryObject {
     public final Vector2 move = new Vector2();
     
     // TODO: move out
-    public static final int LAYER_GAMEPLAY = 3;
-    public static final int LAYER_QUESTS = 4;
+    public static final int LAYER_GAMEPLAY = 4;
+    public static final int LAYER_QUESTS = 5;
     
     // Yeah, this is so stupid, but it looks like java enums are unusable here
     public static final int FIRST_TID = 3701;
