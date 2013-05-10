@@ -27,6 +27,7 @@ public class Person extends StoryObject {
     public static final int TID_ENTER = FIRST_TID+3;
     public static final int TID_OASIS = FIRST_TID+4;
     public static final int TID_SPAWN = FIRST_TID+5;
+    public static final int TID_MAPEND = FIRST_TID+6;
     
     public static final int FIRST_TID_QUEST = 5551;
     
@@ -118,6 +119,7 @@ public class Person extends StoryObject {
                 switch (tid) {
                     case TID_UNPASS:
                     case TID_OASIS:
+                    case TID_MAPEND:
                         dx = 0;
                         dy = 0;
                         break;

@@ -147,6 +147,7 @@ public class MapScreen implements Screen, StoryScreen {
     }
     
     public void update(float dt) {
+        // check movement
         float mdx = 0, mdy = 0;
         if (Gdx.input.isKeyPressed(Keys.LEFT)) {
             mdx += -1*dt;
@@ -166,6 +167,7 @@ public class MapScreen implements Screen, StoryScreen {
         person.update(dt);
         
         
+        // check feature
         if (Gdx.input.isKeyPressed(Keys.SPACE)) {
             if (!pressed.get(Keys.SPACE)) {
                 pressed.put(Keys.SPACE, true);
@@ -173,6 +175,12 @@ public class MapScreen implements Screen, StoryScreen {
             }
         } else {
             pressed.put(Keys.SPACE, false);
+        }
+        
+        
+        //check help
+        if (Gdx.input.isKeyPressed(Keys.F1)) {
+            Story.instance().trigger("help");
         }
     }
     

@@ -36,3 +36,13 @@ Controls:
 [f1]     - call this help
 
 Good luck!"))
+
+
+;; load music
+(load-music "data/music/01-obc.ogg" "obc")
+
+
+;; init actions
+
+;; play music
+(play-loop "obc")
