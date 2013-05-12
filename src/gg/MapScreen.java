@@ -140,7 +140,7 @@ public class MapScreen implements Screen, StoryScreen {
         Label.LabelStyle labelStyle = new Label.LabelStyle();
         labelStyle.font = skin.getFont("default");
         labelStyle.fontColor = Color.DARK_GRAY;
-        labelStyle.background = skin.newDrawable("white", Color.LIGHT_GRAY);
+//         labelStyle.background = skin.newDrawable("white", Color.LIGHT_GRAY);
         skin.add("default", labelStyle);
         
         Window.WindowStyle windowStyle = new Window.WindowStyle();
@@ -249,17 +249,14 @@ public class MapScreen implements Screen, StoryScreen {
     }
     
     void setupStoryStageUi (StoryDialog dialogue) {
-//         Stack stack = new Stack();
-//         stack.setFillParent(true);
-        
-        Table table = new Table();
+        final Table table = new Table();
         table.setFillParent(true);
         
-        Window window = new Window("text", skin);
-        window.setFillParent(true);
+        final Window winDialog = new Window("----", skin);
+        table.add(winDialog);
         
         final Label label = new Label(dialogue.text, skin);
-        window.add(label).space(2);
+        winDialog.add(label).space(6).pad(2);
         
         // dialogue options
         for (Map.Entry<String, StoryEvent> entry : dialogue.options.entrySet()) {
@@ -275,17 +272,25 @@ public class MapScreen implements Screen, StoryScreen {
                     }
                 }
             });
-            window.row();
-            window.add(button).width(256).space(2);
+            winDialog.row();
+            winDialog.add(button).pad(2);
         }
         
-        table.add(window).expand();
+        winDialog.setMovable(true);
+        
+        winDialog.pack();
+        
+        table.top();
         
         storyStage.addActor(table);
     }
     
     @Override
     public void showStory (StoryDialog dialogue) {
+        if (showStory) {
+            hideStory();
+        }
+        
         showStory = true;
         
         setupStoryStageUi(dialogue);
@@ -297,5 +302,6 @@ public class MapScreen implements Screen, StoryScreen {
     public void hideStory () {
         showStory = false;
         updateStoryStage();
+        storyStage.clear();
     }
 }
