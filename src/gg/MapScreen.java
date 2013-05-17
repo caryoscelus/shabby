@@ -118,16 +118,16 @@ public class MapScreen implements Screen, StoryScreen {
         // A skin can be loaded via JSON or defined programmatically, either is fine. Using a skin is optional but strongly
         // recommended solely for the convenience of getting a texture, region, etc as a drawable, tinted drawable, etc.
         skin = new Skin();
-
+        
         // Generate a 1x1 white texture and store it in the skin named "white".
         Pixmap pixmap = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
         pixmap.setColor(Color.WHITE);
         pixmap.fill();
         skin.add("white", new Texture(pixmap));
-
+        
         // Store the default libgdx font under the name "default".
         skin.add("default", new BitmapFont());
-
+        
         // Configure a TextButtonStyle and name it "default". Skin resources are stored by type, so this doesn't overwrite the font.
         TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
         textButtonStyle.up = skin.newDrawable("white", Color.DARK_GRAY);
@@ -253,10 +253,10 @@ public class MapScreen implements Screen, StoryScreen {
         table.setFillParent(true);
         
         final Window winDialog = new Window("----", skin);
-        table.add(winDialog);
+        table.add(winDialog).width(600).height(400);
         
         final Label label = new Label(dialogue.text, skin);
-        winDialog.add(label).space(6).pad(2);
+        winDialog.add(label).space(6).pad(2).expand().top();
         
         // dialogue options
         for (Map.Entry<String, StoryEvent> entry : dialogue.options.entrySet()) {
@@ -276,8 +276,7 @@ public class MapScreen implements Screen, StoryScreen {
             winDialog.add(button).pad(2);
         }
         
-        winDialog.setMovable(true);
-        
+        winDialog.top();
         winDialog.pack();
         
         table.top();
