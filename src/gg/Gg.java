@@ -38,18 +38,21 @@ public class Gg extends Game {
 
     @Override
     public void resize (int width, int height) {
+        getScreen().resize(width, height);
     }
 
     @Override
     public void pause () {
+        getScreen().pause();
     }
 
     @Override
     public void resume () {
+        getScreen().resume();
     }
 
     @Override
     public void dispose () {
-        
+        getScreen().dispose();
     }
 }
