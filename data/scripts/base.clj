@@ -3,13 +3,14 @@
 (import '(gg Story StoryEvent StoryDialog Loader)
         '(java.util HashMap))
 
-(defn show-text [text]
-      (let [dialogue (StoryDialog. text)]
-           (fn []
-               (.ui (Story/instance) dialogue))))
+(defn make-dialog [text & args]
+      (cond
+          (empty? args) (StoryDialog. text)
+          (map? (first args)) (StoryDialog. text (HashMap. (first args)))
+          :else (StoryDialog. text (first args))))
 
-(defn show-dialogue [text options]
-      (let [dialogue (StoryDialog. text (HashMap. options))]
+(defn show-text [text & args]
+      (let [dialogue (apply make-dialog (cons text args))]
            (fn []
                (.ui (Story/instance) dialogue))))
 
@@ -27,17 +28,13 @@
 (defn get-event [ename]
       (.getEvent (Story/instance) ename))
 
-(defn text-event [text]
-      (event (show-text text)))
-
-(defn dialogue-event [text options]
-      (event (show-dialogue text options)))
+(defn text-event [text & args]
+      (event (apply show-text (cons text args))))
 
 
 ;; shortcuts
 (def bind add-event)
 (def txt text-event)
-(def dia dialogue-event)
 (def ev get-event)
 
 

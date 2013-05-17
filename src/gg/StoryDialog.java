@@ -23,6 +23,9 @@ public class StoryDialog {
     public final String text;
     public final HashMap <String, StoryEvent> options;
     
+    /**
+     * Create dialog displaying text with "close" button
+     */
     public StoryDialog (String t) {
         text = t;
         options = new HashMap();
@@ -33,11 +36,28 @@ public class StoryDialog {
         });
     }
     
-    public StoryDialog (String t, HashMap<String, StoryEvent> opts) {
+    /**
+     * Create dialog displaying text and "next" button leading to some
+     * event
+     */
+    public StoryDialog (String t, StoryEvent nexte) {
+        text = t;
+        options = new HashMap();
+        options.put("Next", nexte);
+    }
+    
+    /**
+     * Create dialog with text and options
+     * NOTE: if opts is empty and dialog launched, something bad will happen
+     */
+    public StoryDialog (String t, HashMap<String,StoryEvent> opts) {
         text = t;
         options = opts;
     }
     
+    /**
+     * Add dialog option
+     */
     public void add (String t, StoryEvent event) {
         options.put(t, event);
     }
