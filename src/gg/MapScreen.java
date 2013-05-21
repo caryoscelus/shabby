@@ -70,7 +70,7 @@ public class MapScreen implements Screen, StoryScreen {
     boolean showStory = false;
     
     public void init () {
-        map = new TmxMapLoader().load("data/maps/map.tmx");
+        TiledMap map = new TmxMapLoader().load("data/maps/map.tmx");
         
         renderer = new OrthogonalTiledMapRenderer(map, 1 / TILE_SIZE);
         
@@ -90,6 +90,7 @@ public class MapScreen implements Screen, StoryScreen {
         initUiSkins();
         
         Story.instance().screen = this;
+        Story.instance().addObject("self", person);
         storyStage = new Stage();
         
         initStory();
@@ -164,6 +165,11 @@ public class MapScreen implements Screen, StoryScreen {
     }
     
     public void update(float dt) {
+        if (map != person.onMap) {
+            map = person.onMap;
+            renderer.setMap(map);
+        }
+        
         // check movement
         float mdx = 0, mdy = 0;
         if (Gdx.input.isKeyPressed(Keys.LEFT)) {

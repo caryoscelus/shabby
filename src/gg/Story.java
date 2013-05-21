@@ -25,17 +25,13 @@ import java.util.HashMap;
 public class Story {
     private static Story _instance;
     
-    StoryObject[] objects;
+    Map<String, StoryObject> objects = new HashMap();
     
     Map<Integer, String> eventNames = new HashMap();
     Map<String, StoryEvent> events = new HashMap();
     
     public StoryScreen screen;
     
-//     private Story () {
-//         eventNames = new HashMap();
-//         events = new HashMap();
-//     }
     
     public static Story instance () {
         if (_instance == null) {
@@ -59,6 +55,16 @@ public class Story {
     public StoryEvent getEvent (String name) {
         return events.get(name);
     }
+    
+    
+    public void addObject (String name, StoryObject object) {
+        objects.put(name, object);
+    }
+    
+    public StoryObject getObject (String name) {
+        return objects.get(name);
+    }
+    
     
     public void trigger (int id) {
         trigger(getEvent(id));
