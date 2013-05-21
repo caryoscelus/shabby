@@ -32,10 +32,6 @@ public class Person extends StoryObject {
     public final Vector2 position = new Vector2();
     public final Vector2 move = new Vector2();
     
-    // TODO: move out
-    public static final int LAYER_GAMEPLAY = 4;
-    public static final int LAYER_QUESTS = 5;
-    
     // Yeah, this is so stupid, but it looks like java enums are unusable here
     public static final int FIRST_TID = 3701;
     public static final int TID_EMPTY = FIRST_TID+0;
@@ -117,7 +113,7 @@ public class Person extends StoryObject {
             
             // check ground
             TiledMapTile tile;
-            tile = getTile(LAYER_GAMEPLAY);
+            tile = getTile("gameplay");
             if (tile != null) {
                     int tid = tile.getId();
                     switch (tid) {
@@ -130,7 +126,7 @@ public class Person extends StoryObject {
                     Gdx.app.error("Person.update", "not on map or no feature");
                 }
             
-            tile = getTile(LAYER_GAMEPLAY, dx, dy);
+            tile = getTile("gameplay", dx, dy);
             if (tile != null) {
                 int tid = tile.getId();
                 switch (tid) {
@@ -196,7 +192,7 @@ public class Person extends StoryObject {
     }
     
     public void clicked (float dx, float dy) {
-        TiledMapTile tile = getTile(LAYER_QUESTS, dx, dy);
+        TiledMapTile tile = getTile("quests", dx, dy);
         if (tile != null) {
             int tid = tile.getId();
             story(tid-FIRST_TID_QUEST);
