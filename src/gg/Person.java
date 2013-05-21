@@ -154,9 +154,28 @@ public class Person extends StoryObject {
         return getTile(lid, 0, 0);
     }
     
+    TiledMapTile getTile (String name) {
+        return getTile(name, 0, 0);
+    }
+    
     TiledMapTile getTile (int lid, float dx, float dy) {
         if (onMap != null) {
             TiledMapTileLayer layer = (TiledMapTileLayer) onMap.getLayers().get(lid);
+            return getTile(layer, dx, dy);
+        }
+        return null;
+    }
+    
+    TiledMapTile getTile (String name, float dx, float dy) {
+        if (onMap != null) {
+            TiledMapTileLayer layer = (TiledMapTileLayer) onMap.getLayers().get(name);
+            return getTile(layer, dx, dy);
+        }
+        return null;
+    }
+    
+    TiledMapTile getTile (TiledMapTileLayer layer, float dx, float dy) {
+        if (layer != null) {
             int cx = (int) (getCentre().x+dx);
             int cy = (int) (getCentre().y+dy);
             TiledMapTileLayer.Cell cell = layer.getCell(cx, cy);
