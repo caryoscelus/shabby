@@ -83,6 +83,11 @@ public class Person extends StoryObject {
         }
     }
     
+    public void moveTo (TiledMap map, float x, float y) {
+        onMap = map;
+        position.set(x, y);
+    }
+    
     public void moveTo (TiledMap map, Vector2 xy) {
         onMap = map;
         position.set(xy);
