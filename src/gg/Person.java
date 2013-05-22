@@ -34,13 +34,18 @@ import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.*;
 
 import java.lang.Math;
+import java.util.Map;
+import java.util.HashMap;
 
 public class Person extends StoryObject {
     public TiledMap onMap = null;
     public final Vector2 position = new Vector2();
     public final Vector2 move = new Vector2();
     
+    Map<TiledMap, Vector2> mapPositions = new HashMap();
+    
     // Yeah, this is so stupid, but it looks like java enums are unusable here
+    // maybe just use tile properties instead?
     public static final int FIRST_TID = 3701;
     public static final int TID_EMPTY = FIRST_TID+0;
     public static final int TID_UNPASS = FIRST_TID+1;
@@ -83,14 +88,26 @@ public class Person extends StoryObject {
         }
     }
     
+    public void moveTo (TiledMap map) {
+        Vector2 xy = mapPositions.get(map);
+        float x = 0; float y = 0;                       // replace with defaults
+        if (xy != null) {
+            x = xy.x;
+            y = xy.y;
+        }
+        moveTo(map, x, y);
+    }
+    
     public void moveTo (TiledMap map, float x, float y) {
-        onMap = map;
+        if (onMap != map) {
+            mapPositions.put(onMap, new Vector2(x, y));
+            onMap = map;
+        }
         position.set(x, y);
     }
     
     public void moveTo (TiledMap map, Vector2 xy) {
-        onMap = map;
-        position.set(xy);
+        moveTo(map, xy.x, xy.y);
     }
     
     public void render (SpriteBatch batch) {
