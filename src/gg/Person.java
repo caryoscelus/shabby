@@ -39,10 +39,11 @@ import java.util.HashMap;
 
 public class Person extends StoryObject {
     public TiledMap onMap = null;
+    public String onMapName = null;
     public final Vector2 position = new Vector2();
     public final Vector2 move = new Vector2();
     
-    Map<TiledMap, Vector2> mapPositions = new HashMap();
+    Map<String, Vector2> mapPositions = new HashMap();
     
     // Yeah, this is so stupid, but it looks like java enums are unusable here
     // maybe just use tile properties instead?
@@ -88,8 +89,9 @@ public class Person extends StoryObject {
         }
     }
     
-    public void moveTo (TiledMap map) {
+    public void moveTo (String map) {
         Vector2 xy = mapPositions.get(map);
+        Gdx.app.log("moveTo", ""+map+" "+xy);
         float x = 0; float y = 0;                       // replace with defaults
         if (xy != null) {
             x = xy.x;
@@ -98,15 +100,17 @@ public class Person extends StoryObject {
         moveTo(map, x, y);
     }
     
-    public void moveTo (TiledMap map, float x, float y) {
-        if (onMap != map) {
-            mapPositions.put(onMap, new Vector2(x, y));
-            onMap = map;
+    public void moveTo (String map, float x, float y) {
+        if (onMapName != map) {
+            Gdx.app.log("moveTo", ""+map+" from "+onMapName+" "+position);
+            mapPositions.put(onMapName, position.cpy());
+            onMapName = map;
+            onMap = Loader.instance().loadMap(map);
         }
         position.set(x, y);
     }
     
-    public void moveTo (TiledMap map, Vector2 xy) {
+    public void moveTo (String map, Vector2 xy) {
         moveTo(map, xy.x, xy.y);
     }
     

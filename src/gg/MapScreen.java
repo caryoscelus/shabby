@@ -78,8 +78,6 @@ public class MapScreen implements Screen, StoryScreen {
     boolean showStory = false;
     
     public void init () {
-        TiledMap map = new TmxMapLoader().load("data/maps/map.tmx");
-        
         renderer = new OrthogonalTiledMapRenderer(map, 1 / TILE_SIZE);
         
         camera = new OrthographicCamera();
@@ -89,7 +87,7 @@ public class MapScreen implements Screen, StoryScreen {
         // move to gameplay management
         
         person = new Person();
-        person.moveTo(map, new Vector2(50, 50));
+        person.moveTo("data/maps/map.tmx", new Vector2(50, 50));
         
         // UI
         initUiSkins();
