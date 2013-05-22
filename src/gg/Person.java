@@ -224,13 +224,21 @@ public class Person extends StoryObject {
     public void clicked (float dx, float dy) {
         TiledMapTile tile = getTile("quests", dx, dy);
         if (tile != null) {
-            int tid = tile.getId();
-            story(tid-FIRST_TID_QUEST);
+            String tname = tile.getProperties().get("name", String.class);
+            if (tname != null) {
+                story(tname);
+            } else {
+                int tid = tile.getId();
+                story(tid-FIRST_TID_QUEST);
+            }
         }
     }
     
+    public void story (String tname) {
+        Story.instance().trigger(tname);
+    }
+    
     public void story (int tid) {
-        Gdx.app.log("quests", "trigger story "+tid);
         Story.instance().trigger(tid);
     }
 }
