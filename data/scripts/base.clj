@@ -1,6 +1,6 @@
 (ns story)
 
-(import '(gg Story StoryEvent StoryDialog Loader)
+(import '(gg Story StoryEvent StoryDialog Loader World)
         '(java.util HashMap))
 
 (defn make-dialog [text & args]
@@ -23,7 +23,10 @@
                                false)))))
 
 (defn add-event [id ename new-event]
-      (.addEvent (Story/instance) id ename new-event))
+      (let [ne (cond
+                   (fn? new-event) (event new-event)
+                   :else new-event)]
+           (.addEvent (Story/instance) id ename ne)))
 
 (defn get-event [ename]
       (.getEvent (Story/instance) ename))
@@ -31,6 +34,13 @@
 (defn text-event [text & args]
       (event (apply show-text (cons text args))))
 
+
+(defn change-map [map-name x y]
+      (let [new-map (.loadMap (Loader/instance) map-name)]
+           (.moveTo (.getObject (.story (World/instance)) "self")
+                    new-map
+                    x
+                    y)))
 
 ;; shortcuts
 (def bind add-event)
@@ -40,10 +50,10 @@
 
 
 ;; music
-(defn load-music [fname ename]
-      (.loadTrack (Loader/instance) ename fname))
+(defn load-music [fname]
+      (.loadTrack (Loader/instance) fname))
 
-(defn play-loop [ename]
-      (let [track (.getTrack (Loader/instance) ename)]
+(defn play-loop [fname]
+      (let [track (.loadTrack (Loader/instance) fname)]
            (.setLooping track true)
            (.play track)))
