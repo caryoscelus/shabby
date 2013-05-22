@@ -25,7 +25,7 @@
 
 package gg;
 
-class World {
+public class World {
     private static World _instance;
     
     public static World instance () {

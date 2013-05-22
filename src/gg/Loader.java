@@ -26,6 +26,7 @@
 package gg;
 
 import com.badlogic.gdx.audio.*;
+import com.badlogic.gdx.maps.tiled.*;
 import com.badlogic.gdx.Gdx;
 
 import java.util.HashMap;
@@ -34,6 +35,7 @@ public class Loader {
     private static Loader _instance;
     
     HashMap<String, Music> tracks = new HashMap();
+    HashMap<String, TiledMap> maps = new HashMap();
     
     public static Loader instance () {
         if (_instance == null) {
@@ -42,12 +44,28 @@ public class Loader {
         return _instance;
     }
     
-    public void loadTrack(String name, String fname) {
-        Music music = Gdx.audio.newMusic(Gdx.files.internal(fname));
-        tracks.put(name, music);
+    /**
+     * load sound track if necessary and return it
+     */
+    public Music loadTrack (String fname) {
+        Music music = tracks.get(fname);
+        if (music == null) {
+            music = Gdx.audio.newMusic(Gdx.files.internal(fname));
+            tracks.put(fname, music);
+        }
+        return music;
     }
     
-    public Music getTrack(String name) {
-        return tracks.get(name);
+    
+    /**
+     * load map if necessary and return it
+     */
+    public TiledMap loadMap (String fname) {
+        TiledMap map = maps.get(fname);
+        if (map == null) {
+            map = new TmxMapLoader().load(fname);
+            maps.put(fname, map);
+        }
+        return map;
     }
 }

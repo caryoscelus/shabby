@@ -91,9 +91,6 @@ public class MapScreen implements Screen, StoryScreen {
         person = new Person();
         person.moveTo(map, new Vector2(50, 50));
         
-        
-//         personSprite = new Texture("data/maps/char-1.png");
-        
         // UI
         initUiSkins();
         
