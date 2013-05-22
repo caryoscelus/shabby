@@ -34,13 +34,15 @@
 (defn text-event [text & args]
       (event (apply show-text (cons text args))))
 
+(defn object-move [object new-map & xy]
+      (cond
+          (empty? xy) (.moveTo object new-map)
+          :else (.moveTo object new-map (first xy) (second xy))))
 
-(defn change-map [map-name x y]
-      (let [new-map (.loadMap (Loader/instance) map-name)]
-           (.moveTo (.getObject (.story (World/instance)) "self")
-                    new-map
-                    x
-                    y)))
+(defn change-map [map-name & xy]
+      (let [self (.getObject (.story (World/instance)) "self")]
+           (apply object-move (concat (list self map-name) xy))))
+
 
 ;; shortcuts
 (def bind add-event)
