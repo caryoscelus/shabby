@@ -149,27 +149,30 @@ public class Person extends StoryObject {
             TiledMapTile tile;
             tile = getTile("gameplay");
             if (tile != null) {
-                    int tid = tile.getId();
-                    switch (tid) {
-                        case TID_ROAD:
-                            dx *= ROAD_BOOST;
-                            dy *= ROAD_BOOST;
-                            break;
-                    }
-                } else {
-                    Gdx.app.error("Person.update", "not on map or no feature");
+                // deprecated
+                int tid = tile.getId();
+                switch (tid) {
+                    case TID_ROAD:
+                        dx *= ROAD_BOOST;
+                        dy *= ROAD_BOOST;
+                        break;
                 }
+            } else {
+                Gdx.app.error("Person.update", "not on map or no feature");
+            }
             
             tile = getTile("gameplay", dx, dy);
             if (tile != null) {
-                int tid = tile.getId();
-                switch (tid) {
-                    case TID_UNPASS:
-                    case TID_OASIS:
-                    case TID_MAPEND:
-                        dx = 0;
-                        dy = 0;
-                        break;
+                final String tid = tile.getProperties().get("status", String.class);
+                if (tid != null) {
+                    switch (tid) {
+                        case "unpassable":
+                        case "oasis":
+                        case "mapborder":
+                            dx = 0;
+                            dy = 0;
+                            break;
+                    }
                 }
             }
             
