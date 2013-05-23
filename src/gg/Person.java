@@ -45,17 +45,6 @@ public class Person extends StoryObject {
     
     Map<String, Vector2> mapPositions = new HashMap();
     
-    // Yeah, this is so stupid, but it looks like java enums are unusable here
-    // maybe just use tile properties instead?
-    public static final int FIRST_TID = 3701;
-    public static final int TID_EMPTY = FIRST_TID+0;
-    public static final int TID_UNPASS = FIRST_TID+1;
-    public static final int TID_ROAD = FIRST_TID+2;
-    public static final int TID_ENTER = FIRST_TID+3;
-    public static final int TID_OASIS = FIRST_TID+4;
-    public static final int TID_SPAWN = FIRST_TID+5;
-    public static final int TID_MAPEND = FIRST_TID+6;
-    
     public static final int FIRST_TID_QUEST = 5551;
     
     static final float DEFAULT_SPEED = 4;
@@ -149,13 +138,14 @@ public class Person extends StoryObject {
             TiledMapTile tile;
             tile = getTile("gameplay");
             if (tile != null) {
-                // deprecated
-                int tid = tile.getId();
-                switch (tid) {
-                    case TID_ROAD:
-                        dx *= ROAD_BOOST;
-                        dy *= ROAD_BOOST;
-                        break;
+                final String tid = tile.getProperties().get("status", String.class);
+                if (tid != null) {
+                    switch (tid) {
+                        case "road":
+                            dx *= ROAD_BOOST;
+                            dy *= ROAD_BOOST;
+                            break;
+                    }
                 }
             } else {
                 Gdx.app.error("Person.update", "not on map or no feature");
