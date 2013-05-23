@@ -81,10 +81,15 @@ public class Person extends StoryObject {
     public void moveTo (String map) {
         Vector2 xy = mapPositions.get(map);
         Gdx.app.log("moveTo", ""+map+" "+xy);
-        float x = 0; float y = 0;                       // replace with defaults
+        float x, y;
         if (xy != null) {
             x = xy.x;
             y = xy.y;
+        } else {
+            // this isn't too good :/
+            TiledMap tmap = Loader.instance().loadMap(map);
+            x = Float.parseFloat(tmap.getProperties().get("spawn-x", "0", String.class));
+            y = Float.parseFloat(tmap.getProperties().get("spawn-y", "0", String.class));
         }
         moveTo(map, x, y);
     }
