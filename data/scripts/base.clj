@@ -25,13 +25,17 @@
 (ns story)
 
 (import '(gg Story StoryEvent StoryDialog StoryDialogLine Loader World)
-        '(java.util Vector))
+        '(java.util Vector)
+        '(com.badlogic.gdx Gdx))
+
+(declare event)
 
 (defn make-dialog [text & args]
       (let [opts (first args)]
            (cond
                (nil? opts) (StoryDialog. text)
                (list? opts) (StoryDialog. text (Vector. opts))
+               (fn? opts) (StoryDialog. text (event opts))
                :else (StoryDialog. text opts))))
 
 (defn show-text [text & args]
@@ -40,12 +44,12 @@
                (.ui (Story/instance) dialogue))))
 
 (defn event [action]
-      (proxy [StoryEvent] []
-             (trigger []
-                      (let [a (action)]
-                           (if (= a nil)
-                               true
-                               false)))))
+      (if (fn? action)
+          (proxy [StoryEvent] []
+                 (trigger []
+                          (let [a (action)]
+                               (= a nil))))
+          action))
 
 (defn add-event [ename new-event]
       (let [ne (cond
@@ -68,15 +72,15 @@
       (let [self (.getObject (.story (World/instance)) "self")]
            (apply object-move (concat (list self map-name) xy))))
 
-(defn dialog-line [txt ev & opts]
-      (let [visible (cond
-                        (empty? opts) true
-                        :else (first opts))]
-           (StoryDialogLine. txt ev visible)))
+(defn dialog-line [txt act & opts]
+      (let [visible (if (empty? opts)
+                        true
+                        (first opts))]
+           (StoryDialogLine. txt (event act) visible)))
 
 ;; shortcuts
 (def bind add-event)
-(def t text-event)
+(def t show-text)
 (def ln dialog-line)
 (defn lnh [text ev] (ln text ev false))
 (def ev get-event)
