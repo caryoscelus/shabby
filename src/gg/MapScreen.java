@@ -214,7 +214,7 @@ public class MapScreen implements Screen, StoryScreen {
     public void render (float dt) {
         update(dt);
         
-        Gdx.gl.glClearColor(0.7f, 0.7f, 0.7f, 1);
+        Gdx.gl.glClearColor(0.0f, 0.0f, 0.0f, 1);
         Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
         
         camera.position.x = person.position.x + 1;
@@ -264,8 +264,20 @@ public class MapScreen implements Screen, StoryScreen {
         final Window winDialog = new Window("----", skin);
         table.add(winDialog).width(600).height(400);
         
-        final Label label = new Label(dialogue.text, skin);
-        winDialog.add(label).space(6).pad(2).expand().top();
+        String labelText = dialogue.text;
+        // remove superflous white space
+        labelText = labelText.replace("\t", " ");
+        labelText = labelText.replace("\n", " ");
+        while (labelText.matches("  ")) {
+            labelText = labelText.replace("  ", " ");
+        }
+        
+        // now add some line-breaks for paragraphs
+        labelText = labelText.replace("^", "\n");
+        
+        final Label label = new Label(labelText.toString(), skin);
+        label.setWrap(true);
+        winDialog.add(label).space(6).pad(2).expand().fillX().top().left();
         
         // dialogue options
         for (Map.Entry<String, StoryEvent> entry : dialogue.options.entrySet()) {
