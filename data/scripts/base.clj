@@ -24,14 +24,15 @@
 
 (ns story)
 
-(import '(gg Story StoryEvent StoryDialog Loader World)
-        '(java.util HashMap))
+(import '(gg Story StoryEvent StoryDialog StoryDialogLine Loader World)
+        '(java.util Vector))
 
 (defn make-dialog [text & args]
-      (cond
-          (empty? args) (StoryDialog. text)
-          (map? (first args)) (StoryDialog. text (HashMap. (first args)))
-          :else (StoryDialog. text (first args))))
+      (let [opts (first args)]
+           (cond
+               (nil? opts) (StoryDialog. text)
+               (list? opts) (StoryDialog. text (Vector. opts))
+               :else (StoryDialog. text opts))))
 
 (defn show-text [text & args]
       (let [dialogue (apply make-dialog (cons text args))]
@@ -67,10 +68,17 @@
       (let [self (.getObject (.story (World/instance)) "self")]
            (apply object-move (concat (list self map-name) xy))))
 
+(defn dialog-line [txt ev & opts]
+      (let [visible (cond
+                        (empty? opts) true
+                        :else (first opts))]
+           (StoryDialogLine. txt ev visible)))
 
 ;; shortcuts
 (def bind add-event)
-(def txt text-event)
+(def t text-event)
+(def ln dialog-line)
+(defn lnh [text ev] (ln text ev false))
 (def ev get-event)
 
 
