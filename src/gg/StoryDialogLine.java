@@ -25,48 +25,26 @@
 
 package gg;
 
-import java.util.Vector;
-
-public class StoryDialog {
-    public final String text;
-    public final Vector <StoryDialogLine> options;
+public class StoryDialogLine {
+    String text;
+    StoryEvent event;
+    boolean visible;
     
     /**
-     * Create dialog displaying text with "close" button
+     * Simple, visible story line
      */
-    public StoryDialog (String t) {
+    public StoryDialogLine (String t, StoryEvent ev) {
         text = t;
-        options = new Vector();
-        add("Close", new StoryEvent() {
-            public boolean trigger () {
-                return false;
-            }
-        });
+        event = ev;
+        visible = true;
     }
     
     /**
-     * Create dialog displaying text and "next" button leading to some
-     * event
+     * Optionally visible story line
      */
-    public StoryDialog (String t, StoryEvent nexte) {
+    public StoryDialogLine (String t, StoryEvent ev, boolean v) {
         text = t;
-        options = new Vector();
-        add("Next", nexte);
-    }
-    
-    /**
-     * Create dialog with text and options
-     * NOTE: if opts is empty and dialog launched, something bad will happen
-     */
-    public StoryDialog (String t, Vector<StoryDialogLine> opts) {
-        text = t;
-        options = opts;
-    }
-    
-    /**
-     * Add dialog option
-     */
-    public void add (String t, StoryEvent event) {
-        options.add(new StoryDialogLine(t, event));
+        event = ev;
+        visible = v;
     }
 }

@@ -298,21 +298,23 @@ public class MapScreen implements Screen, StoryScreen {
         winDialog.add(label).space(6).pad(2).expand().fillX().top().left();
         
         // dialogue options
-        for (Map.Entry<String, StoryEvent> entry : dialogue.options.entrySet()) {
-            final String text = entry.getKey();
-            final StoryEvent event = entry.getValue();
-            
-            final TextButton button = new TextButton(text, skin);
-            button.addListener(new ChangeListener() {
-                public void changed (ChangeEvent cevent, Actor actor) {
-                    boolean result = event.trigger();
-                    if (!result) {
-                        hideStory();
+        for (StoryDialogLine line : dialogue.options) {
+            if (line.visible) {
+                final String text = line.text;
+                final StoryEvent event = line.event;
+                
+                final TextButton button = new TextButton(text, skin);
+                button.addListener(new ChangeListener() {
+                    public void changed (ChangeEvent cevent, Actor actor) {
+                        boolean result = event.trigger();
+                        if (!result) {
+                            hideStory();
+                        }
                     }
-                }
-            });
-            winDialog.row();
-            winDialog.add(button).pad(2);
+                });
+                winDialog.row();
+                winDialog.add(button).pad(2);
+            }
         }
         
         winDialog.top();
