@@ -275,7 +275,25 @@ public class MapScreen implements Screen, StoryScreen {
         // now add some line-breaks for paragraphs
         labelText = labelText.replace("^", "\n");
         
-        final Label label = new Label(labelText.toString(), skin);
+        // now check if we should display a picture
+        String[] t = labelText.split("(\\<img\\:|\\>)");
+        String img = null;
+        if (t.length > 1) {
+            img = t[1];
+            if (t.length > 2) {
+                labelText = t[0] + t[2];
+            } else {
+                labelText = t[0];
+            }
+        }
+        
+        if (img != null) {
+            final Image image = new Image(new Texture(Gdx.files.internal(img)));
+            winDialog.add(image);
+            winDialog.row();
+        }
+        
+        final Label label = new Label(labelText, skin);
         label.setWrap(true);
         winDialog.add(label).space(6).pad(2).expand().fillX().top().left();
         
