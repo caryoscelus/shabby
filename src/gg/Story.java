@@ -33,7 +33,6 @@ import java.util.HashMap;
 public class Story {
     Map<String, StoryObject> objects = new HashMap();
     
-    Map<Integer, String> eventNames = new HashMap();
     Map<String, StoryEvent> events = new HashMap();
     
     public StoryScreen screen;
@@ -45,15 +44,8 @@ public class Story {
     }
     
     
-    public void addEvent (int id, String name, StoryEvent event) {
-        Gdx.app.log("story", "addevent "+name+" "+id);
-        
-        eventNames.put(id, name);
+    public void addEvent (String name, StoryEvent event) {
         events.put(name, event);
-    }
-    
-    public StoryEvent getEvent (int id) {
-        return getEvent(eventNames.get(id));
     }
     
     public StoryEvent getEvent (String name) {
@@ -69,10 +61,6 @@ public class Story {
         return objects.get(name);
     }
     
-    
-    public void trigger (int id) {
-        trigger(getEvent(id));
-    }
     
     public void trigger (String name) {
         trigger(getEvent(name));

@@ -230,17 +230,12 @@ public class Person extends StoryObject {
             if (tname != null) {
                 story(tname);
             } else {
-                int tid = tile.getId();
-                story(tid-FIRST_TID_QUEST);
+                Gdx.app.log("story", "no story name here; ids not supported anymore");
             }
         }
     }
     
     public void story (String tname) {
         Story.instance().trigger(tname);
-    }
-    
-    public void story (int tid) {
-        Story.instance().trigger(tid);
     }
 }
