@@ -27,7 +27,7 @@ package gg;
 
 import java.util.Vector;
 
-public class StoryDialog {
+public class StoryDialog implements StoryEvent {
     public final String text;
     public final Vector <StoryDialogLine> options;
     
@@ -68,5 +68,12 @@ public class StoryDialog {
      */
     public void add (String t, StoryEvent event) {
         options.add(new StoryDialogLine(t, event));
+    }
+    
+    
+    @Override
+    public boolean trigger () {
+        Story.instance().ui(this);
+        return true;
     }
 }
