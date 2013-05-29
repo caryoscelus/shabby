@@ -28,7 +28,7 @@ package gg;
 public class StoryDialogLine {
     String text;
     StoryEvent event;
-    boolean visible;
+    public boolean visible;
     
     /**
      * Simple, visible story line

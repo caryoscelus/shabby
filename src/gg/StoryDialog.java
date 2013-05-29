@@ -64,10 +64,26 @@ public class StoryDialog implements StoryEvent {
     }
     
     /**
-     * Add dialog option
+     * Add dialog option, return line number
      */
-    public void add (String t, StoryEvent event) {
+    public int add (String t, StoryEvent event) {
         options.add(new StoryDialogLine(t, event));
+        return options.size()-1;
+    }
+    
+    /**
+     * Add dialog option, return line number
+     */
+    public int add (StoryDialogLine line) {
+        options.add(line);
+        return options.size()-1;
+    }
+    
+    /**
+     * Enable/disable line
+     */
+    public void setActive (int lid, boolean v) {
+        options.get(lid).visible = v;
     }
     
     
