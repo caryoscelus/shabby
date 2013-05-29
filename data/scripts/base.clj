@@ -48,7 +48,9 @@
           (proxy [StoryEvent] []
                  (trigger []
                           (let [a (action)]
-                               (= a nil))))
+                               (if (= a nil)
+                                   false
+                                   a))))
           action))
 
 (defn add-event [ename new-event]
