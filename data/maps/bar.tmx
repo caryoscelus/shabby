@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="32" height="32" tilewidth="16" tileheight="16">
+ <properties>
+  <property name="spawn-x" value="16"/>
+  <property name="spawn-y" value="10.2"/>
+ </properties>
+ <tileset firstgid="1" name="tiles-bar" tilewidth="16" tileheight="16">
+  <image source="tiles-bar.png" width="800" height="600"/>
+ </tileset>
+ <tileset firstgid="1851" name="quest-tiles" tilewidth="16" tileheight="16">
+  <image source="quest-tiles.png" width="96" height="16"/>
+  <tile id="0">
+   <properties>
+    <property name="name" value="oasis"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="name" value="bar-out"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="name" value="barman"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="1857" name="char-2" tilewidth="16" tileheight="16">
+  <image source="char-2.png" width="800" height="600"/>
+ </tileset>
+ <tileset firstgid="3707" name="gameplay-tiles" tilewidth="16" tileheight="16">
+  <image source="gameplay-tiles.png" width="800" height="600"/>
+  <tile id="0">
+   <properties>
+    <property name="status" value="empty"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="status" value="unpassable"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="status" value="road"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="status" value="enter"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="status" value="oasis"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="status" value="spawn"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="status" value="mapborder"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="black" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3BAQ0AAADCoPdPbQ8HFAAAAPBuEQAcxwAQAAA=
+  </data>
+ </layer>
+ <layer name="floor" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3VV04UUBiG4cnMsAS7oAgoYN2FFZCqdLvuwoqFjmDdhRUsdOzuwoqNomI3Phs4ybkxMXHe5Ln7v7uTnEQi07/Y52QiMccXvvKN7/zgJ7/4zRTTzDDLRz4lw/vYVqUSiUKKKGY1a1jLOtazgVxWkEc+BaxMhfex1bqto54GGmmimV3sZg+VVFFNDTvYmQrvY2tz204HnXTRTQ9n6aWPFk5yitOcoTUV3sc26HaIYUYYZYxxJrjHffoZ4Ba3ucPdVHgf25TbaWaY5SOf+MwcX/jKJG94yzve8yEV3seWm/auyCOfAlayikKKKGYJS8kmh2UsT4f3sVW6raKaGnawk1rqqKeBEkopYzvlVKTD+9ha3J7kFKc5QytttNNBJ4c5wlGOcZwT6fA+tn63A9ziNne4yyBDDDPCFa5yjevc4GY6vI9t0u0b3vKO93xgimlmmOUZz3nBS17xOh3ex7Yky7simxyWsZxcVpBHPvOYzwIWsojFWeF9bCVuSyljO+VUUEkV1dSwkU1sZgtb2ZYV3sfW7K/YxW72sJd97OcABzlELXXU00AjTcnwPrYet2fppY9znOcCF7nEZdpop4NOuuhOhvexjbud4B73ecBDHvGYJzxlkCGGGWGUsWR4H9v//v9nypQpU6a/2x8vEa2XABAAAA==
+  </data>
+ </layer>
+ <layer name="abc" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA2NgGAXYwFFGBoZjQHwciE8A8Uk8/GNY+MexqD/FONC+GgXDDZgD05QFEFsOUNrKBNqbBcTZgyBt4woLeoURrrCgZRgNZz+T6jdqhwWpfhsKYUEuGMp+Hg7xT29AbPvnNBCfGW3/jIJRMApGwZADAET48rYAEAAA
+  </data>
+ </layer>
+ <layer name="char" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3NQQ0AIAwEsPtNF1gC/4E3BpaQ1kAT+M+oZFbfv+69G38AAIDXAXYHGOUAEAAA
+  </data>
+ </layer>
+ <layer name="def" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3NWQrCMBhF4e7LcTetU7XdTeu0ILXQwS6neIQIPgRJwNCXe+DjJw/hRpH6ZxNMMcPS3DkW5u1ajAQrrLGx3K3l3w4p9sjNPSAzb9cKlDha7glnXCz/rh4bvvvv3QeqH/9C7LvsfqrRoEWH55feY/+Gu8duiIaRdpVSSimllFJhegEkUH4vABAAAA==
+  </data>
+ </layer>
+ <layer name="gameplay" width="32" height="32" visible="0" opacity="0.6">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA6vhY2CoGcWDDleTiQnpHbWf9vbTO/5JUU9r/w+0/bj01tDJ/oHwPyE/D+X4J8Vvwz3+qSE+1Pw/Gv8DYz+xuA6KqW3uKB7Fo3gUj2LaYgCyGR4vABAAAA==
+  </data>
+ </layer>
+ <layer name="quests" width="32" height="32" visible="0" opacity="0.66">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3NsQ0AMAjAMDbOgv+vYuAFlla2lDkR8J/OzR8A7lVuALxlAKxU+3EAEAAA
+  </data>
+ </layer>
+</map>
