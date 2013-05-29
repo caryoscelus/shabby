@@ -28,20 +28,20 @@
         '(java.util Vector)
         '(com.badlogic.gdx Gdx))
 
-(declare event)
+(declare event show-text)
+
+(defn log [text]
+      (.log (Gdx/app) "log" (str text)))
 
 (defn make-dialog [text & args]
-      (let [opts (first args)]
-           (cond
-               (nil? opts) (StoryDialog. text)
-               (list? opts) (StoryDialog. text (Vector. opts))
-               (fn? opts) (StoryDialog. text (event opts))
-               :else (StoryDialog. text opts))))
-
-(defn show-text [text & args]
-      (let [dialogue (apply make-dialog (cons text args))]
-           (fn []
-               (.ui (Story/instance) dialogue))))
+      (if (= (class text) StoryDialog)
+          text
+          (let [opts (first args)]
+               (cond
+                   (nil? opts) (StoryDialog. text)
+                   (list? opts) (StoryDialog. text (Vector. opts))
+                   (fn? opts) (StoryDialog. text (event opts))
+                   :else (StoryDialog. text opts)))))
 
 (defn event [action]
       (if (fn? action)
@@ -60,9 +60,6 @@
 (defn get-event [ename]
       (.getEvent (Story/instance) ename))
 
-(defn text-event [text & args]
-      (event (apply show-text (cons text args))))
-
 (defn object-move [object new-map & xy]
       (cond
           (empty? xy) (.moveTo object new-map)
@@ -80,7 +77,7 @@
 
 ;; shortcuts
 (def bind add-event)
-(def t show-text)
+(def t make-dialog)
 (def ln dialog-line)
 (defn lnh [text ev] (ln text ev false))
 (def ev get-event)
