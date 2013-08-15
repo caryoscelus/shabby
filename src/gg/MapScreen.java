@@ -39,11 +39,6 @@ import com.badlogic.gdx.Input.*;
 import java.lang.Math;
 import java.util.Map;
 import java.util.HashMap;
-import java.io.IOException;
-
-import clojure.lang.RT;
-import clojure.lang.Var;
-import clojure.lang.Compiler;
 
 /**
  * Main game screen: map screen
@@ -95,26 +90,7 @@ public class MapScreen implements Screen, StoryScreen {
         Story.instance().addObject("self", person);
         storyStage = new StoryStage();
         
-        initStory();
-    }
-    
-    // move to story
-    void initStory () {
-        try {
-            // if this removed, crash occurs..; could be replaced by access to
-            // any static member of RT though
-            RT.init();
-            
-            // libs
-            Compiler.loadFile("data/scripts/base.clj");
-            
-            Compiler.loadFile("data/scripts/story.clj");
-        } catch (IOException e) {
-            Gdx.app.error("clojure", "can't find file", e);
-        }
-        
-        // show help
-        Story.instance().trigger("help");
+        Story.instance().init();
     }
     
     @Override

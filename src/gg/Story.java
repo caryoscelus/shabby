@@ -29,6 +29,12 @@ import com.badlogic.gdx.Gdx;
 
 import java.util.Map;
 import java.util.HashMap;
+import java.io.IOException;
+
+import clojure.lang.RT;
+import clojure.lang.Var;
+import clojure.lang.Compiler;
+
 
 /**
  * Story is singleton storing named objects and events
@@ -47,6 +53,26 @@ public class Story {
         return World.instance().story;
     }
     
+    
+    /**
+     * Init: load scripts and run their init
+     */
+    public void init () {
+        try {
+            // if this removed, crash occurs..; could be replaced by access to
+            // any static member of RT though
+            RT.init();
+            
+            // libs
+            Compiler.loadFile("data/scripts/base.clj");
+            
+            Compiler.loadFile("data/scripts/story.clj");
+        } catch (IOException e) {
+            Gdx.app.error("clojure", "can't find file", e);
+        }
+        
+        trigger("_init");
+    }
     
     public void addEvent (String name, StoryEvent event) {
         events.put(name, event);
