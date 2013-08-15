@@ -96,8 +96,8 @@ public class Story {
     /**
      * Check whether we should exit or just return to some previous dialogue
      */
-    public boolean checkExit () {
-        if (saved != null) {
+    public boolean checkExit (StoryDialog dialogue) {
+        if (saved != null && saved != dialogue) {
             ui(saved);
             return false;
         }

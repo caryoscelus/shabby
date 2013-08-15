@@ -264,7 +264,7 @@ public class MapScreen implements Screen, StoryScreen {
     /**
      * Setup storyStage from dialogue
      */
-    void setupStoryStageUi (StoryDialog dialogue) {
+    void setupStoryStageUi (final StoryDialog dialogue) {
         final Table table = new Table();
         table.setFillParent(true);
         
@@ -315,7 +315,7 @@ public class MapScreen implements Screen, StoryScreen {
                     public void changed (ChangeEvent cevent, Actor actor) {
                         boolean result = event.trigger();
                         if (!result) {
-                            if (Story.instance().checkExit()) {
+                            if (Story.instance().checkExit(dialogue)) {
                                 hideStory();
                             }
                         }
