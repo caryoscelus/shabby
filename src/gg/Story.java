@@ -32,8 +32,9 @@ import java.util.HashMap;
 
 public class Story {
     Map<String, StoryObject> objects = new HashMap();
-    
     Map<String, StoryEvent> events = new HashMap();
+    
+    StoryDialog saved = null;
     
     public StoryScreen screen;
     
@@ -62,10 +63,16 @@ public class Story {
     }
     
     
+    /**
+     * Trigger event by name
+     */
     public void trigger (String name) {
         trigger(getEvent(name));
     }
     
+    /**
+     * Trigger specific event
+     */
     public void trigger (StoryEvent event) {
         if (event != null) {
             event.trigger();
@@ -73,9 +80,23 @@ public class Story {
     }
     
     
+    /**
+     * Show dialogue through screen
+     */
     public void ui (StoryDialog dialogue) {
         if (screen != null) {
             screen.showStory(dialogue);
         }
+    }
+    
+    /**
+     * Check whether we should exit or just return to some previous dialogue
+     */
+    public boolean checkExit () {
+        if (saved != null) {
+            ui(saved);
+            return false;
+        }
+        return true;
     }
 }

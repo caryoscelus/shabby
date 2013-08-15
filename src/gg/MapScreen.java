@@ -117,7 +117,8 @@ public class MapScreen implements Screen, StoryScreen {
         // show help
         Story.instance().trigger("help");
     }
-    
+
+    // move to ui manager
     void initUiSkins () {
         // A skin can be loaded via JSON or defined programmatically, either is fine. Using a skin is optional but strongly
         // recommended solely for the convenience of getting a texture, region, etc as a drawable, tinted drawable, etc.
@@ -251,12 +252,18 @@ public class MapScreen implements Screen, StoryScreen {
     
     
     // UI
+    /**
+     * Setup inputprocessor to storyStage if present
+     */
     void updateStoryStage () {
         if (showStory) {
             Gdx.input.setInputProcessor(storyStage);
         }
     }
     
+    /**
+     * Setup storyStage from dialogue
+     */
     void setupStoryStageUi (StoryDialog dialogue) {
         final Table table = new Table();
         table.setFillParent(true);
@@ -308,7 +315,9 @@ public class MapScreen implements Screen, StoryScreen {
                     public void changed (ChangeEvent cevent, Actor actor) {
                         boolean result = event.trigger();
                         if (!result) {
-                            hideStory();
+                            if (Story.instance().checkExit()) {
+                                hideStory();
+                            }
                         }
                     }
                 });
