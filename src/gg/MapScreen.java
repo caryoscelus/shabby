@@ -35,7 +35,6 @@ import com.badlogic.gdx.maps.tiled.renderers.*;
 import com.badlogic.gdx.math.*;
 import com.badlogic.gdx.utils.*;
 import com.badlogic.gdx.Input.*;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
 import java.lang.Math;
 import java.util.Map;
@@ -72,10 +71,7 @@ public class MapScreen implements Screen, StoryScreen {
     
     
     // UI
-    Skin skin;
-    
-    Stage storyStage;
-    boolean showStory = false;
+    StoryStage storyStage;
     
     public void init () {
         renderer = new OrthogonalTiledMapRenderer(map, 1 / TILE_SIZE);
@@ -90,11 +86,11 @@ public class MapScreen implements Screen, StoryScreen {
         person.moveTo("data/maps/map.tmx", new Vector2(50, 50));
         
         // UI
-        initUiSkins();
+        UiManager.instance().init();
         
         Story.instance().screen = this;
         Story.instance().addObject("self", person);
-        storyStage = new Stage();
+        storyStage = new StoryStage();
         
         initStory();
     }
@@ -116,42 +112,6 @@ public class MapScreen implements Screen, StoryScreen {
         
         // show help
         Story.instance().trigger("help");
-    }
-
-    // move to ui manager
-    void initUiSkins () {
-        // A skin can be loaded via JSON or defined programmatically, either is fine. Using a skin is optional but strongly
-        // recommended solely for the convenience of getting a texture, region, etc as a drawable, tinted drawable, etc.
-        skin = new Skin();
-        
-        // Generate a 1x1 white texture and store it in the skin named "white".
-        Pixmap pixmap = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
-        pixmap.setColor(Color.WHITE);
-        pixmap.fill();
-        skin.add("white", new Texture(pixmap));
-        
-        // Store the default libgdx font under the name "default".
-        skin.add("default", new BitmapFont());
-        
-        // Configure a TextButtonStyle and name it "default". Skin resources are stored by type, so this doesn't overwrite the font.
-        TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
-        textButtonStyle.up = skin.newDrawable("white", Color.DARK_GRAY);
-        textButtonStyle.down = skin.newDrawable("white", Color.DARK_GRAY);
-        textButtonStyle.checked = skin.newDrawable("white", Color.BLUE);
-        textButtonStyle.over = skin.newDrawable("white", Color.LIGHT_GRAY);
-        textButtonStyle.font = skin.getFont("default");
-        skin.add("default", textButtonStyle);
-        
-        Label.LabelStyle labelStyle = new Label.LabelStyle();
-        labelStyle.font = skin.getFont("default");
-        labelStyle.fontColor = Color.DARK_GRAY;
-//         labelStyle.background = skin.newDrawable("white", Color.LIGHT_GRAY);
-        skin.add("default", labelStyle);
-        
-        Window.WindowStyle windowStyle = new Window.WindowStyle();
-        windowStyle.titleFont = skin.getFont("default");
-        windowStyle.background = skin.newDrawable("white", Color.LIGHT_GRAY);
-        skin.add("default", windowStyle);
     }
     
     @Override
@@ -227,7 +187,7 @@ public class MapScreen implements Screen, StoryScreen {
         
         person.render(renderer.getSpriteBatch());
         
-        if (showStory) {
+        if (storyStage.show) {
             storyStage.act(dt);
             storyStage.draw();
         }
@@ -256,100 +216,27 @@ public class MapScreen implements Screen, StoryScreen {
      * Setup inputprocessor to storyStage if present
      */
     void updateStoryStage () {
-        if (showStory) {
+        if (storyStage.show) {
             Gdx.input.setInputProcessor(storyStage);
         }
     }
     
-    /**
-     * Setup storyStage from dialogue
-     */
-    void setupStoryStageUi (final StoryDialog dialogue) {
-        final Table table = new Table();
-        table.setFillParent(true);
-        
-        final Window winDialog = new Window("----", skin);
-        table.add(winDialog).width(600).height(400);
-        
-        String labelText = dialogue.text;
-        // remove superflous white space
-        labelText = labelText.replace("\t", " ");
-        labelText = labelText.replace("\n", " ");
-        while (labelText.matches("  ")) {
-            labelText = labelText.replace("  ", " ");
-        }
-        
-        // now add some line-breaks for paragraphs
-        labelText = labelText.replace("^", "\n");
-        
-        // now check if we should display a picture
-        String[] t = labelText.split("(\\<img\\:|\\>)");
-        String img = null;
-        if (t.length > 1) {
-            img = t[1];
-            if (t.length > 2) {
-                labelText = t[0] + t[2];
-            } else {
-                labelText = t[0];
-            }
-        }
-        
-        if (img != null) {
-            final Image image = new Image(new Texture(Gdx.files.internal(img)));
-            winDialog.add(image);
-            winDialog.row();
-        }
-        
-        final Label label = new Label(labelText, skin);
-        label.setWrap(true);
-        winDialog.add(label).space(6).pad(2).expand().fillX().top().left();
-        
-        // dialogue options
-        for (StoryDialogLine line : dialogue.options) {
-            if (line.visible) {
-                final String text = line.text;
-                final StoryEvent event = line.event;
-                
-                final TextButton button = new TextButton(text, skin);
-                button.addListener(new ChangeListener() {
-                    public void changed (ChangeEvent cevent, Actor actor) {
-                        boolean result = event.trigger();
-                        if (!result) {
-                            if (Story.instance().checkExit(dialogue)) {
-                                hideStory();
-                            }
-                        }
-                    }
-                });
-                winDialog.row();
-                winDialog.add(button).pad(2);
-            }
-        }
-        
-        winDialog.top();
-        winDialog.pack();
-        
-        table.top();
-        
-        storyStage.addActor(table);
-    }
-    
     @Override
     public void showStory (StoryDialog dialogue) {
-        if (showStory) {
+        if (storyStage.show) {
             hideStory();
         }
         
-        showStory = true;
+        storyStage.show = true;
         
-        setupStoryStageUi(dialogue);
+        storyStage.setupUi(dialogue);
         
         updateStoryStage();
     }
     
     @Override
     public void hideStory () {
-        showStory = false;
+        storyStage.show = false;
         updateStoryStage();
         storyStage.clear();
     }
