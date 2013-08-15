@@ -165,15 +165,20 @@ zipfileset id="jarfiles" -> the jar files to be merged with the project's classe
         </jar>
     </target>
     
-    <target name="bundle" depends="jar">
+    <target name="bundle" depends="compile">
         <jar destfile="${distDir}/bundle.jar">
+            <fileset dir="${target}/java"/>
+            <zipgroupfileset file="${libs}/*.jar">
+<!--                 <exclude name="*-natives.jar"/> -->
+                <exclude name="*-debug.jar"/>
+                <exclude name="android-*.jar"/>
+                <exclude name="gwt*.jar"/>
+            </zipgroupfileset>
+            <fileset dir="." includes="data/" defaultexcludes="no"/>
+            <fileset dir="." includes="GPL3,README.md" defaultexcludes="no"/>
             <manifest>
                 <attribute name="Main-Class" value="${main-class}"/>
             </manifest>
-            <zipgroupfileset dir="${libs}" includes="*.jar"/>
-            <zipgroupfileset dir="dist" includes="gg.jar"/>
-            
-            <fileset dir="." includes="data/" defaultexcludes="no"/>
         </jar>
     </target>
     
