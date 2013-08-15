@@ -45,7 +45,7 @@ All my relaxation disappeared right away.."))
 (bind "bar-out" (fn []
                       (change-map "data/maps/map.tmx")))
 
-(bind "barman" (t
+(bind "barman" (tr
 "Barman"
 (list
  (ln "Hello"
@@ -57,6 +57,8 @@ All my relaxation disappeared right away.."))
          true))
  (lnh "Ok, here's your monies"
       (t "Thanks, but i won't give you anything for this.."))
+ (ln "..."
+     (fn [] false))
 )))
 
 
