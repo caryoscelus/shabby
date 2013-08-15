@@ -80,6 +80,7 @@ Good luck!"
  (ln "Close" (event (fn [] false)))
 )))
 
+(bind "_init" (ev "help"))
 
 ;; init actions
 

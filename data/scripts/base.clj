@@ -24,7 +24,7 @@
 
 (ns story)
 
-(import '(gg Story StoryEvent StoryDialog StoryDialogLine Loader World)
+(import '(gg Story StoryEvent StoryDialog StoryDialogLine Loader World Streamer)
         '(java.util Vector)
         '(com.badlogic.gdx Gdx))
 
@@ -88,10 +88,6 @@
 
 
 ;; music
-(defn load-music [fname]
-      (.loadTrack (Loader/instance) fname))
-
 (defn play-loop [fname]
-      (let [track (.loadTrack (Loader/instance) fname)]
-           (.setLooping track true)
-           (.play track)))
+      (.load (Streamer/instance) fname)
+      (.play (Streamer/instance)))
