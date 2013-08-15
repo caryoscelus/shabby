@@ -84,6 +84,10 @@ public class Story {
      * Show dialogue through screen
      */
     public void ui (StoryDialog dialogue) {
+        if (dialogue.saveThis) {
+            saved = dialogue;
+        }
+        
         if (screen != null) {
             screen.showStory(dialogue);
         }

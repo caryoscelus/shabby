@@ -33,15 +33,15 @@
 (defn log [text]
       (.log (Gdx/app) "log" (str text)))
 
-(defn make-dialog [text & args]
+(defn make-dialog [text save & args]
       (if (= (class text) StoryDialog)
           text
           (let [opts (first args)]
                (cond
-                   (nil? opts) (StoryDialog. text)
-                   (list? opts) (StoryDialog. text (Vector. opts))
-                   (fn? opts) (StoryDialog. text (event opts))
-                   :else (StoryDialog. text opts)))))
+                   (nil? opts) (StoryDialog. text save)
+                   (list? opts) (StoryDialog. text (Vector. opts) save)
+                   (fn? opts) (StoryDialog. text (event opts) save)
+                   :else (StoryDialog. text opts save)))))
 
 (defn event [action]
       (if (fn? action)
@@ -79,7 +79,8 @@
 
 ;; shortcuts
 (def bind add-event)
-(def t make-dialog)
+(defn t [text & args] (apply make-dialog (concat (list text false) args)))
+(defn tr [text & args] (apply make-dialog (concat (list text true) args)))
 (def ln dialog-line)
 (defn lnh [text ev] (ln text ev false))
 (def ev get-event)

@@ -31,10 +31,12 @@ public class StoryDialog implements StoryEvent {
     public final String text;
     public final Vector <StoryDialogLine> options;
     
+    public final boolean saveThis;
+    
     /**
      * Create dialog displaying text with "close" button
      */
-    public StoryDialog (String t) {
+    public StoryDialog (String t, boolean save) {
         text = t;
         options = new Vector();
         add("Close", new StoryEvent() {
@@ -42,25 +44,28 @@ public class StoryDialog implements StoryEvent {
                 return false;
             }
         });
+        saveThis = save;
     }
     
     /**
      * Create dialog displaying text and "next" button leading to some
      * event
      */
-    public StoryDialog (String t, StoryEvent nexte) {
+    public StoryDialog (String t, StoryEvent nexte, boolean save) {
         text = t;
         options = new Vector();
         add("Next", nexte);
+        saveThis = save;
     }
     
     /**
      * Create dialog with text and options
      * NOTE: if opts is empty and dialog launched, something bad will happen
      */
-    public StoryDialog (String t, Vector<StoryDialogLine> opts) {
+    public StoryDialog (String t, Vector<StoryDialogLine> opts, boolean save) {
         text = t;
         options = opts;
+        saveThis = save;
     }
     
     /**
