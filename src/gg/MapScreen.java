@@ -72,24 +72,40 @@ public class MapScreen implements Screen, StoryScreen {
     StoryStage storyStage;
     
     public void init () {
+        initRenderer();
+        initUi();
+        initGame();
+    }
+    
+    /**
+     * Init map renderer; TODO: move to map renderer class
+     */
+    public void initRenderer () {
         renderer = new OrthogonalTiledMapRenderer(map, 1 / TILE_SIZE);
         
         camera = new OrthographicCamera();
         camera.setToOrtho(false, TILES_NX, TILES_NY);
         camera.update();
-        
-        // move to gameplay management
-        
-        person = new Person();
-        person.moveTo("data/maps/map.tmx", new Vector2(50, 50));
-        
+    }
+    
+    /**
+     * Init ui
+     */
+    public void initUi () {
         // UI
         UiManager.instance().init();
         
         Story.instance().screen = this;
         Story.instance().addObject("self", person);
         storyStage = new StoryStage();
-        
+    }
+    
+    /**
+     * Init gameplay and story; move to gameplay management
+     */
+    public void initGame () {
+        person = new Person();
+        person.moveTo("data/maps/map.tmx", new Vector2(50, 50));
         Story.instance().init();
     }
     
