@@ -37,19 +37,9 @@ import java.lang.Math;
 import java.util.Map;
 import java.util.HashMap;
 
-public class Person extends StoryObject {
-    public TiledMap onMap = null;
-    public String onMapName = null;
-    public final Vector2 position = new Vector2();
-    public final Vector2 move = new Vector2();
-    
-    Map<String, Vector2> mapPositions = new HashMap();
-    
+public class Person extends MapObject {
     public static final int FIRST_TID_QUEST = 5551;
-    
-    static final float DEFAULT_SPEED = 4;
-    static final float ROAD_BOOST = 1.5f;
-    
+        
     // gfx
     Texture texture;
     Animation defaultSprite;
@@ -76,36 +66,6 @@ public class Person extends StoryObject {
             spriteRun[i] = new Animation(0.11f, tmp);
             spriteRun[i].setPlayMode(Animation.LOOP);
         }
-    }
-    
-    public void moveTo (String map) {
-        Vector2 xy = mapPositions.get(map);
-        Gdx.app.log("moveTo", ""+map+" "+xy);
-        float x, y;
-        if (xy != null) {
-            x = xy.x;
-            y = xy.y;
-        } else {
-            // this isn't too good :/
-            TiledMap tmap = Loader.instance().loadMap(map);
-            x = Float.parseFloat(tmap.getProperties().get("spawn-x", "0", String.class));
-            y = Float.parseFloat(tmap.getProperties().get("spawn-y", "0", String.class));
-        }
-        moveTo(map, x, y);
-    }
-    
-    public void moveTo (String map, float x, float y) {
-        if (onMapName != map) {
-            Gdx.app.log("moveTo", ""+map+" from "+onMapName+" "+position);
-            mapPositions.put(onMapName, position.cpy());
-            onMapName = map;
-            onMap = Loader.instance().loadMap(map);
-        }
-        position.set(x, y);
-    }
-    
-    public void moveTo (String map, Vector2 xy) {
-        moveTo(map, xy.x, xy.y);
     }
     
     public void render (SpriteBatch batch) {
@@ -177,47 +137,6 @@ public class Person extends StoryObject {
             state = State.Stand;
         }
     }
-    
-    TiledMapTile getTile (int lid) {
-        return getTile(lid, 0, 0);
-    }
-    
-    TiledMapTile getTile (String name) {
-        return getTile(name, 0, 0);
-    }
-    
-    TiledMapTile getTile (int lid, float dx, float dy) {
-        if (onMap != null) {
-            TiledMapTileLayer layer = (TiledMapTileLayer) onMap.getLayers().get(lid);
-            return getTile(layer, dx, dy);
-        }
-        return null;
-    }
-    
-    TiledMapTile getTile (String name, float dx, float dy) {
-        if (onMap != null) {
-            TiledMapTileLayer layer = (TiledMapTileLayer) onMap.getLayers().get(name);
-            return getTile(layer, dx, dy);
-        }
-        return null;
-    }
-    
-    TiledMapTile getTile (TiledMapTileLayer layer, float dx, float dy) {
-        if (layer != null) {
-            int cx = (int) (getCentre().x+dx);
-            int cy = (int) (getCentre().y+dy);
-            TiledMapTileLayer.Cell cell = layer.getCell(cx, cy);
-            if (cell != null) {
-                return cell.getTile();
-            }
-        }
-        return null;
-    }
-    
-    Vector2 getCentre () {
-        return new Vector2().set(position).add(1, 1);
-    }
-    
     
     public void clicked () {
         clicked(0, 0);
