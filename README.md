@@ -1,11 +1,23 @@
 shabby
 ======
 
-Simple gdx game written for learning.
+Simple game using Java, Gdx and Clojure.
+
+Originally written for learning; maybe will grow into something bigger later.
+At that point, game and engine will be separated.
+
+Current status: early development, but runnable
 
 Dependencies
 ------------
 You need to put libgdx and clojure jars into libs/ directory.
+
+Building & running
+------------------
+From root directory run:
+* "ant runfast" - will build & run
+* "ant justrun" - will only run (need to be build previously)
+* "ant jar" - will build a jar
 
 License
 -------
