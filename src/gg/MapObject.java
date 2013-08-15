@@ -33,6 +33,9 @@ import com.badlogic.gdx.math.*;
 import java.util.Map;
 import java.util.HashMap;
 
+/**
+ * Object that can be placed on map
+ */
 public class MapObject extends StoryObject {
     public TiledMap onMap = null;
     public String onMapName = null;

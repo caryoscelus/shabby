@@ -45,6 +45,9 @@ import clojure.lang.RT;
 import clojure.lang.Var;
 import clojure.lang.Compiler;
 
+/**
+ * Main game screen: map screen
+ */
 public class MapScreen implements Screen, StoryScreen {
     // renderers
     OrthogonalTiledMapRenderer renderer;

@@ -31,6 +31,9 @@ import com.badlogic.gdx.Gdx;
 
 import java.util.HashMap;
 
+/**
+ * Singleton for loading and storing various data objects
+ */
 public class Loader {
     private static Loader _instance;
     

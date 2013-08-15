@@ -25,6 +25,9 @@
 
 package gg;
 
+/**
+ * Interface for screens capable of story displaying
+ */
 public interface StoryScreen {
     public void showStory (StoryDialog dialogue);
     public void hideStory ();

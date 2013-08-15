@@ -37,14 +37,18 @@ import java.lang.Math;
 import java.util.Map;
 import java.util.HashMap;
 
+/**
+ * Player's person.
+ * TODO: separate rendering, input and everything else
+ */
 public class Person extends MapObject {
-    public static final int FIRST_TID_QUEST = 5551;
-        
     // gfx
     Texture texture;
     Animation defaultSprite;
     Animation[] spriteRun = new Animation[8];
     Animation[] spriteStand = new Animation[8];
+    
+    // gfx state
     int direction = 0;
     enum State {
         Stand, Run

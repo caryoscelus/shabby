@@ -25,6 +25,10 @@
 
 package gg;
 
+/**
+ * World singleton;
+ * Right now contains only Story instance
+ */
 public class World {
     private static World _instance;
     

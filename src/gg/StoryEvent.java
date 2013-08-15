@@ -27,6 +27,9 @@ package gg;
 
 import com.badlogic.gdx.Gdx;
 
+/**
+ * Interface for story events
+ */
 public interface StoryEvent {
     public boolean trigger ();
 }

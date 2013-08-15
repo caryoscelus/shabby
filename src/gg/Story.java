@@ -30,6 +30,9 @@ import com.badlogic.gdx.Gdx;
 import java.util.Map;
 import java.util.HashMap;
 
+/**
+ * Story is singleton storing named objects and events
+ */
 public class Story {
     Map<String, StoryObject> objects = new HashMap();
     Map<String, StoryEvent> events = new HashMap();

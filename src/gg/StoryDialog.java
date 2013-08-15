@@ -27,6 +27,10 @@ package gg;
 
 import java.util.Vector;
 
+/**
+ * StoryDialog: text + options.
+ * Typically used as event. Actual event is working via Story singleton
+ */
 public class StoryDialog implements StoryEvent {
     public final String text;
     public final Vector <StoryDialogLine> options;

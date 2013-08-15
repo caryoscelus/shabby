@@ -25,6 +25,9 @@
 
 package gg;
 
+/**
+ * Root class for story objects, currently empty
+ */
 public class StoryObject {
     
 }

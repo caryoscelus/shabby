@@ -25,6 +25,9 @@
 
 package gg;
 
+/**
+ * Line (option) of StoryDialog: text + event
+ */
 public class StoryDialogLine {
     String text;
     StoryEvent event;
