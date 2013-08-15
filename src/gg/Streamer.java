@@ -25,44 +25,64 @@
 
 package gg;
 
-import com.badlogic.gdx.files.*;
-import com.badlogic.gdx.maps.tiled.*;
-import com.badlogic.gdx.Gdx;
-
-import java.util.HashMap;
+import com.badlogic.gdx.*;
+import com.badlogic.gdx.audio.*;
 
 /**
- * Singleton for loading and storing various data objects
+ * Singleton for playback control
  */
-public class Loader {
-    private static Loader _instance;
-    
-    Streamer streamer = new Streamer();
-    HashMap<String, TiledMap> maps = new HashMap();
-    
-    public static Loader instance () {
-        if (_instance == null) {
-            _instance = new Loader();
-        }
-        return _instance;
+public class Streamer {
+    public static Streamer instance() {
+        return Loader.instance().streamer;
     }
     
-    /**
-     * Load any file by filename
-     */
-    public FileHandle load (String fname) {
-        return Gdx.files.internal(fname);
+    Music music;
+    boolean playing = false;
+    boolean enabled = true;
+    
+    public void load (String fname) {
+        if (music != null) {
+            music.dispose();
+        }
+        music = Gdx.audio.newMusic(Loader.instance().load(fname));
     }
     
-    /**
-     * load map if necessary and return it
-     */
-    public TiledMap loadMap (String fname) {
-        TiledMap map = maps.get(fname);
-        if (map == null) {
-            map = new TmxMapLoader().load(fname);
-            maps.put(fname, map);
+    public void pause () {
+        if (enabled && music != null) {
+            music.pause();
         }
-        return map;
+    }
+    
+    public void play () {
+        if (enabled && music != null) {
+            music.play();
+        }
+    }
+    
+    public void stop () {
+        if (music != null) {
+            music.stop();
+        }
+    }
+    
+    public boolean isPlaying () {
+        return music != null && music.isPlaying();
+    }
+    
+    public void enable () {
+        enabled = true;
+        if (playing) {
+            play();
+        }
+    }
+    
+    public void disable () {
+        playing = isPlaying();
+        enabled = false;
+        pause();
+    }
+    
+    public boolean isEnabled () {
+        return enabled;
     }
 }

@@ -164,6 +164,17 @@ public class MapScreen implements Screen, StoryScreen {
         if (Gdx.input.isKeyPressed(Keys.F1)) {
             Story.instance().trigger("help");
         }
+        
+        // check sound
+        // TODO: make proper handler
+        if (Gdx.input.isKeyPressed(Keys.F2)) {
+            Streamer st = Streamer.instance();
+            if (st.isEnabled()) {
+                st.disable();
+            } else {
+                st.enable();
+            }
+        }
     }
     
     @Override
