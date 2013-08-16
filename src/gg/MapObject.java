@@ -29,6 +29,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.*;
 import com.badlogic.gdx.maps.tiled.*;
 import com.badlogic.gdx.math.*;
+import com.badlogic.gdx.graphics.*;
+import com.badlogic.gdx.graphics.g2d.*;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -46,6 +48,13 @@ public class MapObject extends StoryObject {
     
     static final float DEFAULT_SPEED = 4;
     static final float ROAD_BOOST = 1.5f;
+    
+    MapDrawableData viewData = null;
+    MapDrawable view = null;
+    
+    public void render (SpriteBatch batch) {
+        view.render(batch, viewData);
+    }
     
     /**
      * Move to specific map; use either saved position or get spawn-x and spawn-y properties

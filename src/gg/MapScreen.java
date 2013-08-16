@@ -86,6 +86,8 @@ public class MapScreen implements Screen, StoryScreen {
         camera = new OrthographicCamera();
         camera.setToOrtho(false, TILES_NX, TILES_NY);
         camera.update();
+        
+        MapDrawableFactory.instance().init();
     }
     
     /**

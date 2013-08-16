@@ -34,7 +34,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 /**
  * Ui manager; currently just initializes skins
  */
-class UiManager {
+public class UiManager {
     private static UiManager _instance;
     
     public static UiManager instance () {

@@ -34,7 +34,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 /**
  * Stage for displaying story
  */
-class StoryStage extends Stage {
+public class StoryStage extends Stage {
     public boolean show = false;
     
     /**

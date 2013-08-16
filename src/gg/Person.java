@@ -29,8 +29,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.*;
 import com.badlogic.gdx.maps.tiled.*;
 import com.badlogic.gdx.maps.objects.*;
-import com.badlogic.gdx.graphics.*;
-import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.*;
 
 import java.lang.Math;
@@ -42,58 +40,20 @@ import java.util.HashMap;
  * TODO: separate rendering, input and everything else
  */
 public class Person extends MapObject {
-    // gfx
-    Texture texture;
-    Animation defaultSprite;
-    Animation[] spriteRun = new Animation[8];
-    Animation[] spriteStand = new Animation[8];
-    
     // gfx state
     int direction = 0;
     enum State {
         Stand, Run
     }
     State state = State.Stand;
-    float tc;
     
     public Person () {
-        texture = new Texture("data/maps/char-1.png");
-        TextureRegion[][] regions = TextureRegion.split(texture, 32, 32);
-        
-        defaultSprite = new Animation(0, regions[0][0]);
-        
-        for (int i = 0; i < 8; ++i) {
-            spriteStand[i] = new Animation(0, regions[i+1][0]);
-            
-            TextureRegion[] tmp = new TextureRegion[8];
-            System.arraycopy(regions[i+1], 1, tmp, 0, 8);
-            spriteRun[i] = new Animation(0.11f, tmp);
-            spriteRun[i].setPlayMode(Animation.LOOP);
-        }
-    }
-    
-    public void render (SpriteBatch batch) {
-        final Animation[] spriteT;
-        if (state == State.Run) {
-            spriteT = spriteRun;
-        } else {
-            spriteT = spriteStand;
-        }
-        // fix this when all animations are done
-        if (direction % 4 == 3) {
-            direction = (direction+1)%8;
-        }
-        direction = direction/2*2;
-        final Animation sprite = spriteT[direction];
-        
-        batch.begin();
-        batch.draw(sprite.getKeyFrame(tc), position.x, position.y, 2, 2);
-        batch.end();
+        viewData = new PersonViewData(this);
+        view = MapDrawableFactory.instance().personView;
     }
     
     public void update (float dt) {
-        // fur animations
-        tc += dt;
+        viewData.update (dt);
         
         if (move.x != 0 || move.y != 0) {
             int angle = ((int) move.angle()/45) * 45;
