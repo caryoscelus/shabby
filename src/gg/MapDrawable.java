@@ -32,6 +32,13 @@ import com.badlogic.gdx.graphics.g2d.*;
  * Represents renderer for map objects
  */
 public interface MapDrawable {
+    /**
+     * Load all required textures, etc
+     */
     public void init ();
+    
+    /**
+     * Render on batch using data
+     */
     public void render (SpriteBatch batch, MapDrawableData data);
 }

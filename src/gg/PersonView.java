@@ -29,12 +29,16 @@ import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.*;
 
+/**
+ * View class for person
+ */
 public class PersonView implements MapDrawable {
     Texture texture;
     Animation defaultSprite;
     Animation[] spriteRun = new Animation[8];
     Animation[] spriteStand = new Animation[8];
     
+    @Override
     public void init () {
         texture = new Texture("data/maps/char-1.png");
         TextureRegion[][] regions = TextureRegion.split(texture, 32, 32);
