@@ -12,6 +12,7 @@ zipfileset id="jarfiles" -> the jar files to be merged with the project's classe
 <project name="hello" default="all" basedir=".">
     <property name="jar" value="gg"/>
     <property name="distDir" value="dist"/>
+    <property name="docDir" value="doc"/>
 
     <!-- default values -->
     <path id="src">
@@ -201,6 +202,10 @@ zipfileset id="jarfiles" -> the jar files to be merged with the project's classe
     
     <target name="runbundle" depends="bundle">
         <java fork="true" jar="${distDir}/bundle.jar"/>
+    </target>
+    
+    <target name="doc" depends="init" description="generate documentation">
+        <javadoc sourcepathref="src" destdir="${docDir}"/>
     </target>
     
     <target name="all" depends="jar">

@@ -8,3 +8,6 @@
 *.jar
 *.war
 *.ear
+
+# docs
+doc/
