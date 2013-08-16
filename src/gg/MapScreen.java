@@ -73,8 +73,8 @@ public class MapScreen implements Screen, StoryScreen {
     
     public void init () {
         initRenderer();
-        initUi();
         initGame();
+        initUi();
     }
     
     /**
