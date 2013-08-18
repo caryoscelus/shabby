@@ -28,7 +28,7 @@
         '(java.util Vector)
         '(com.badlogic.gdx Gdx))
 
-(declare event show-text)
+(declare event)
 
 (defn log [text]
       (.log (Gdx/app) "log" (str text)))
@@ -91,3 +91,8 @@
 (defn play-loop [fname]
       (.load (Streamer/instance) fname)
       (.play (Streamer/instance)))
+
+
+;; input
+(defn add-key-handler [tkey action]
+      (.registerKeyAction (.screen (Story/instance)) tkey action))

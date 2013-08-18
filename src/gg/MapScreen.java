@@ -33,8 +33,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.maps.tiled.*;
 import com.badlogic.gdx.maps.tiled.renderers.*;
 import com.badlogic.gdx.math.*;
-import com.badlogic.gdx.utils.*;
-import com.badlogic.gdx.Input.*;
+import com.badlogic.gdx.Input.Keys;
 
 import java.lang.Math;
 import java.util.Map;
@@ -66,6 +65,7 @@ public class MapScreen implements Screen, StoryScreen {
     
     // input
     Map<Integer,Boolean> pressed = new HashMap();
+    Map<Integer,Object> keyActions = new HashMap();
     
     
     // UI
@@ -73,6 +73,7 @@ public class MapScreen implements Screen, StoryScreen {
     
     public void init () {
         initRenderer();
+        initScripting();
         initGame();
         initUi();
     }
@@ -80,7 +81,7 @@ public class MapScreen implements Screen, StoryScreen {
     /**
      * Init map renderer; TODO: move to map renderer class
      */
-    public void initRenderer () {
+    void initRenderer () {
         renderer = new OrthogonalTiledMapRenderer(map, 1 / TILE_SIZE);
         
         camera = new OrthographicCamera();
@@ -91,21 +92,31 @@ public class MapScreen implements Screen, StoryScreen {
     }
     
     /**
+     * Init scripting
+     */
+    void initScripting () {
+        Scripting.init();
+    }
+    
+    /**
      * Init ui
      */
-    public void initUi () {
+    void initUi () {
         // UI
         UiManager.instance().init();
         
         Story.instance().screen = this;
         Story.instance().addObject("self", person);
         storyStage = new StoryStage();
+        
+        Scripting.run("data/scripts/input.clj");
+        Scripting.call("input", "setup-input");
     }
     
     /**
      * Init gameplay and story; move to gameplay management
      */
-    public void initGame () {
+    void initGame () {
         person = new Person();
         person.moveTo("data/maps/map.tmx", new Vector2(50, 50));
         Story.instance().init();
@@ -125,7 +136,10 @@ public class MapScreen implements Screen, StoryScreen {
         
     }
     
-    public void update(float dt) {
+    /**
+     * Logic update
+     */
+    void update(float dt) {
         if (map != person.onMap) {
             map = person.onMap;
             renderer.setMap(map);
@@ -161,10 +175,17 @@ public class MapScreen implements Screen, StoryScreen {
             pressed.put(Keys.SPACE, false);
         }
         
-        
-        //check help
-        if (Gdx.input.isKeyPressed(Keys.F1)) {
-            Story.instance().trigger("help");
+        for (Map.Entry<Integer, Object> entry : keyActions.entrySet()) {
+            Integer key = entry.getKey();
+            Object action = entry.getValue();
+            if (Gdx.input.isKeyPressed(key)) {
+                if (!pressed.get(key)) {
+                    pressed.put(key, true);
+                    Scripting.call(action);
+                }
+            } else {
+                pressed.put(key, false);
+            }
         }
         
         // check sound
@@ -177,6 +198,10 @@ public class MapScreen implements Screen, StoryScreen {
                 st.enable();
             }
         }
+    }
+    
+    public void registerKeyAction (Integer key, Object action) {
+        keyActions.put(key, action);
     }
     
     @Override
