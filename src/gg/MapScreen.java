@@ -187,17 +187,6 @@ public class MapScreen implements Screen, StoryScreen {
                 pressed.put(key, false);
             }
         }
-        
-        // check sound
-        // TODO: make proper handler
-        if (Gdx.input.isKeyPressed(Keys.F2)) {
-            Streamer st = Streamer.instance();
-            if (st.isEnabled()) {
-                st.disable();
-            } else {
-                st.enable();
-            }
-        }
     }
     
     public void registerKeyAction (Integer key, Object action) {

@@ -26,5 +26,12 @@
 
 (import 'com.badlogic.gdx.Input$Keys)
 
+(import 'gg.Streamer)
+
 (defn setup-input []
-      (add-key-handler (Input$Keys/F1) (fn [] (.trigger (get-event "help")))))
+      (add-key-handler (Input$Keys/F1) (fn [] (.trigger (get-event "help"))))
+      (add-key-handler (Input$Keys/F2) (fn []
+                                           (let [st (Streamer/instance)]
+                                                (if (.isEnabled st)
+                                                    (.disable st)
+                                                    (.enable st))))))
