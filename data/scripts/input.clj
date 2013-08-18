@@ -26,7 +26,7 @@
 
 (import 'com.badlogic.gdx.Input$Keys)
 
-(import 'gg.Streamer)
+(import 'gg.Streamer 'gg.Story)
 
 (defn setup-input []
       (add-key-handler (Input$Keys/F1) (fn [] (.trigger (get-event "help"))))
@@ -34,4 +34,6 @@
                                            (let [st (Streamer/instance)]
                                                 (if (.isEnabled st)
                                                     (.disable st)
-                                                    (.enable st))))))
+                                                    (.enable st)))))
+      (add-key-handler (Input$Keys/SPACE) (fn []
+                                              (.clicked (.person (.screen (Story/instance)))))))

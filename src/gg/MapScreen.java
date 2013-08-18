@@ -58,7 +58,7 @@ public class MapScreen implements Screen, StoryScreen {
     Texture personSprite;
     
     // gameplay
-    Person person;
+    public Person person;
     
     
     boolean inited = false;
@@ -163,17 +163,6 @@ public class MapScreen implements Screen, StoryScreen {
         person.move.x = mdx;
         person.move.y = mdy;
         person.update(dt);
-        
-        
-        // check feature
-        if (Gdx.input.isKeyPressed(Keys.SPACE)) {
-            if (!pressed.get(Keys.SPACE)) {
-                pressed.put(Keys.SPACE, true);
-                person.clicked();
-            }
-        } else {
-            pressed.put(Keys.SPACE, false);
-        }
         
         for (Map.Entry<Integer, Object> entry : keyActions.entrySet()) {
             Integer key = entry.getKey();
