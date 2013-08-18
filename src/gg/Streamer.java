@@ -40,6 +40,9 @@ public class Streamer {
     boolean playing = false;
     boolean enabled = true;
     
+    /**
+     * Load track from file
+     */
     public void load (String fname) {
         if (music != null) {
             music.dispose();
@@ -47,28 +50,44 @@ public class Streamer {
         music = Gdx.audio.newMusic(Loader.instance().load(fname));
     }
     
+    /**
+     * Pause playing current track
+     */
     public void pause () {
         if (enabled && music != null) {
             music.pause();
         }
     }
     
+    /**
+     * Resume/start playing current track
+     */
     public void play () {
         if (enabled && music != null) {
             music.play();
         }
     }
     
+    /**
+     * Stop playing
+     */
     public void stop () {
         if (music != null) {
             music.stop();
         }
     }
     
+    /**
+     * Returns true if playing
+     */
     public boolean isPlaying () {
         return music != null && music.isPlaying();
     }
     
+    /**
+     * Enable streaming.
+     * Will resume playing track if it was playing before disable() called
+     */
     public void enable () {
         enabled = true;
         if (playing) {
@@ -76,12 +95,19 @@ public class Streamer {
         }
     }
     
+    /**
+     * Disable streaming.
+     * Sound will be paused until it's enabled again
+     */
     public void disable () {
         playing = isPlaying();
-        enabled = false;
         pause();
+        enabled = false;
     }
     
+    /**
+     * Returns true if enabled
+     */
     public boolean isEnabled () {
         return enabled;
     }
