@@ -25,19 +25,22 @@
 
 package gg;
 
-public class MapDrawableFactory {
-    private static MapDrawableFactory _instance;
+import com.badlogic.gdx.graphics.*;
+import com.badlogic.gdx.graphics.g2d.*;
+
+/**
+ * Represents renderer for map objects
+ */
+public interface MapObjectView {
+    /**
+     * Load all required textures, etc
+     */
+    public void init ();
     
-    public static MapDrawableFactory instance () {
-        if (_instance == null) {
-            _instance = new MapDrawableFactory();
-        }
-        return _instance;
-    }
-    
-    public PersonView personView = new PersonView();
-    
-    public void init () {
-        personView.init();
-    }
+    /**
+     * Render on batch using data
+     * @param batch SpriteBatch to use for rendering
+     * @param data MapObjectViewData to use for rendering
+     */
+    public void render (SpriteBatch batch, MapObjectViewData data);
 }

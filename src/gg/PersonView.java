@@ -32,7 +32,7 @@ import com.badlogic.gdx.math.*;
 /**
  * View class for person
  */
-public class PersonView implements MapDrawable {
+public class PersonView implements MapObjectView {
     Texture texture;
     Animation defaultSprite;
     Animation[] spriteRun = new Animation[8];
@@ -56,7 +56,7 @@ public class PersonView implements MapDrawable {
     }
     
     @Override
-    public void render (SpriteBatch batch, MapDrawableData data) {
+    public void render (SpriteBatch batch, MapObjectViewData data) {
         PersonViewData pdata = (PersonViewData) data;
         
         final Animation[] spriteT;

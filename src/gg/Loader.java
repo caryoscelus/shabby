@@ -48,7 +48,8 @@ public class Loader {
     }
     
     /**
-     * Load any file by filename
+     * Load any local file by filename
+     * @param fname relative file name
      */
     public FileHandle load (String fname) {
         return Gdx.files.internal(fname);
@@ -56,6 +57,7 @@ public class Loader {
     
     /**
      * load map if necessary and return it
+     * @param fname relative file name
      */
     public TiledMap loadMap (String fname) {
         TiledMap map = maps.get(fname);

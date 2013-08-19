@@ -36,7 +36,8 @@ import java.util.Map;
 import java.util.HashMap;
 
 /**
- * Object that can be placed on map
+ * Object that can be placed on map.
+ * Needs lots of cleaning
  */
 public class MapObject extends StoryObject {
     public TiledMap onMap = null;
@@ -49,15 +50,17 @@ public class MapObject extends StoryObject {
     static final float DEFAULT_SPEED = 4;
     static final float ROAD_BOOST = 1.5f;
     
-    MapDrawableData viewData = null;
-    MapDrawable view = null;
+    MapObjectViewData viewData = null;
+    MapObjectView view = null;
     
     public void render (SpriteBatch batch) {
         view.render(batch, viewData);
     }
     
     /**
-     * Move to specific map; use either saved position or get spawn-x and spawn-y properties
+     * Move to specific map.
+     * Will use either saved position or get spawn-x and spawn-y properties
+     * @param map name of map
      */
     public void moveTo (String map) {
         Vector2 xy = mapPositions.get(map);
@@ -77,6 +80,9 @@ public class MapObject extends StoryObject {
     
     /**
      * Move to specific map and position
+     * @param map name of map
+     * @param x x-coordinate on new map
+     * @param y y-coordinate on new map
      */
     public void moveTo (String map, float x, float y) {
         if (onMapName != map) {
@@ -90,6 +96,8 @@ public class MapObject extends StoryObject {
     
     /**
      * Move to specific map and position
+     * @param map name of map
+     * @param xy new position
      */
     public void moveTo (String map, Vector2 xy) {
         moveTo(map, xy.x, xy.y);
@@ -97,6 +105,7 @@ public class MapObject extends StoryObject {
     
     /**
      * Get tile from layer with lid at current position
+     * @param lid Layer id to get tile from
      */
     TiledMapTile getTile (int lid) {
         return getTile(lid, 0, 0);
@@ -104,6 +113,7 @@ public class MapObject extends StoryObject {
     
     /**
      * Get tile from layer with name at current position
+     * @param name Layer name to get tile from
      */
     TiledMapTile getTile (String name) {
         return getTile(name, 0, 0);
@@ -111,6 +121,9 @@ public class MapObject extends StoryObject {
     
     /**
      * Get tile from layer with lid at offseted position
+     * @param lid Layer id to get tile from
+     * @param dx delta x
+     * @param dy delta y
      */
     TiledMapTile getTile (int lid, float dx, float dy) {
         if (onMap != null) {
@@ -122,6 +135,9 @@ public class MapObject extends StoryObject {
     
     /**
      * Get tile from layer with name at offseted position
+     * @param name Layer name to get tile from
+     * @param dx delta x
+     * @param dy delta y
      */
     TiledMapTile getTile (String name, float dx, float dy) {
         if (onMap != null) {
@@ -133,6 +149,9 @@ public class MapObject extends StoryObject {
     
     /**
      * Get tile from specific layer at offseted position
+     * @param layer Layer to get tile from
+     * @param dx delta x
+     * @param dy delta y
      */
     TiledMapTile getTile (TiledMapTileLayer layer, float dx, float dy) {
         if (layer != null) {

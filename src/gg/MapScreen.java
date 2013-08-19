@@ -88,7 +88,7 @@ public class MapScreen implements Screen, StoryScreen {
         camera.setToOrtho(false, TILES_NX, TILES_NY);
         camera.update();
         
-        MapDrawableFactory.instance().init();
+        MapObjectViewFactory.instance().init();
     }
     
     /**
@@ -138,6 +138,7 @@ public class MapScreen implements Screen, StoryScreen {
     
     /**
      * Logic update
+     * @param dt float delta time in seconds
      */
     void update(float dt) {
         if (map != person.onMap) {

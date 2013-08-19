@@ -37,7 +37,7 @@ import java.util.HashMap;
 
 /**
  * Player's person.
- * Needs lots of cleaning..
+ * Needs some cleaning..
  */
 public class Person extends MapObject {
     // gfx state
@@ -49,11 +49,13 @@ public class Person extends MapObject {
     
     public Person () {
         viewData = new PersonViewData(this);
-        view = MapDrawableFactory.instance().personView;
+        view = MapObjectViewFactory.instance().personView;
     }
     
     /**
-     * update
+     * update.
+     * Needs cleaning
+     * @param dt float time delta in seconds
      */
     public void update (float dt) {
         viewData.update (dt);
@@ -114,6 +116,8 @@ public class Person extends MapObject {
     
     /**
      * React on 'click' offseted to centre
+     * @param dx float x offset
+     * @param dy float y offset
      */
     public void clicked (float dx, float dy) {
         TiledMapTile tile = getTile("quests", dx, dy);
@@ -129,6 +133,7 @@ public class Person extends MapObject {
     
     /**
      * Trigger story; this is just helper, maybe remove or make private?
+     * @param tname story name
      */
     public void story (String tname) {
         Story.instance().trigger(tname);

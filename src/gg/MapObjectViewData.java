@@ -25,20 +25,9 @@
 
 package gg;
 
-import com.badlogic.gdx.graphics.*;
-import com.badlogic.gdx.graphics.g2d.*;
-
 /**
- * Represents renderer for map objects
+ * Interace for MapObjectView's data
  */
-public interface MapDrawable {
-    /**
-     * Load all required textures, etc
-     */
-    public void init ();
-    
-    /**
-     * Render on batch using data
-     */
-    public void render (SpriteBatch batch, MapDrawableData data);
+public interface MapObjectViewData {
+    public void update (float dt);
 }

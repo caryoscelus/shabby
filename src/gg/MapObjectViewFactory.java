@@ -26,8 +26,22 @@
 package gg;
 
 /**
- * Interace for MapDrawable's data
+ * Contains all the MapObjectView's.
+ * Note: this should be rethinked and reworked
  */
-public interface MapDrawableData {
-    public void update (float dt);
+public class MapObjectViewFactory {
+    private static MapObjectViewFactory _instance;
+    
+    public static MapObjectViewFactory instance () {
+        if (_instance == null) {
+            _instance = new MapObjectViewFactory();
+        }
+        return _instance;
+    }
+    
+    public PersonView personView = new PersonView();
+    
+    public void init () {
+        personView.init();
+    }
 }

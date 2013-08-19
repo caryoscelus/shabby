@@ -25,7 +25,7 @@
 
 package gg;
 
-public class PersonViewData implements MapDrawableData {
+public class PersonViewData implements MapObjectViewData {
     Person origin;
     
     float tc;
