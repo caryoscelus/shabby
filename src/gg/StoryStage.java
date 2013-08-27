@@ -38,6 +38,33 @@ public class StoryStage extends Stage {
     public boolean show = false;
     
     /**
+     * Stupid string parser.
+     * Removes opening and closing and separate what was between them
+     * and the rest
+     * @param str String to parse
+     * @param opening String to cut from
+     * @param closing String to cut to
+     * @return (parsed string, enclosed text)
+     */
+    protected String[] parse(String str, String opening, String closing) {
+        String cut = null;
+        String[] t = str.split("("+opening+"|"+closing+")");
+        if (t.length > 1) {
+            cut = t[1];
+            if (t.length > 2) {
+                str = t[0] + t[2];
+            } else {
+                str = t[0];
+            }
+        }
+        
+        String[] r = new String[2];
+        r[0] = str;
+        r[1] = cut;
+        return r;
+    }
+    
+    /**
      * Setup storyStage from dialogue
      */
     void setupUi (final StoryDialog dialogue) {
@@ -60,16 +87,9 @@ public class StoryStage extends Stage {
         labelText = labelText.replace("^", "\n");
         
         // now check if we should display a picture
-        String[] t = labelText.split("(\\<img\\:|\\>)");
-        String img = null;
-        if (t.length > 1) {
-            img = t[1];
-            if (t.length > 2) {
-                labelText = t[0] + t[2];
-            } else {
-                labelText = t[0];
-            }
-        }
+        String[] t = parse(labelText, "<img:", ">");
+        labelText = t[0];
+        String img = t[1];
         
         if (img != null) {
             final Image image = new Image(new Texture(Gdx.files.internal(img)));
