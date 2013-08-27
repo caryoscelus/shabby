@@ -1,16 +1,16 @@
 shabby
 ======
 
-Simple game using Java, Gdx and Clojure.
+Simple game using Chlorophytum engine (https://github.com/caryoscelus/chlorophytum)
 
 Originally written for learning; maybe will grow into something bigger later.
-At that point, game and engine will be separated.
 
 Current status: early development, but runnable
 
 Dependencies
 ------------
-You need to put libgdx and clojure jars into libs/ directory.
+First of all, you need Chlorophytum. Compile it and put jar into libs/ directory.
+You'll also need to put libgdx and clojure jars into libs/ directory.
 
 Building & running
 ------------------
