@@ -41,6 +41,7 @@ import com.badlogic.gdx.maps.tiled.*;
 import com.badlogic.gdx.maps.tiled.renderers.*;
 import com.badlogic.gdx.math.*;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import java.lang.Math;
 import java.util.Map;
@@ -74,9 +75,11 @@ public class MapScreen implements Screen, StoryScreen {
     Map<Integer,Boolean> pressed = new HashMap();
     Map<Integer,Object> keyActions = new HashMap();
     
+    InputMultiplexer inputMultiplexer;
     
     // UI
     StoryStage storyStage;
+    Stage stage;
     
     public void init () {
         initRenderer();
@@ -116,8 +119,22 @@ public class MapScreen implements Screen, StoryScreen {
         Story.instance().addObject("self", person);
         storyStage = new StoryStage();
         
+        stage = new Stage();
+        
         Scripting.run("data/scripts/input.clj");
         Scripting.call("input", "setup-input");
+        
+        // Input
+        inputMultiplexer = new InputMultiplexer();
+        inputMultiplexer.addProcessor(storyStage);
+        inputMultiplexer.addProcessor(stage);
+        stage.addListener(new ClickListener () {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                processClick(x, y);
+            }
+        });
+        Gdx.input.setInputProcessor(inputMultiplexer);
     }
     
     /**
@@ -186,8 +203,35 @@ public class MapScreen implements Screen, StoryScreen {
         }
     }
     
+    public void processClick (float x, float y) {
+        Vector2 t = screenToMap(new Vector2(x, y)).sub(person.position);
+        person.clicked(t.x, t.y);
+    }
+    
     public void registerKeyAction (Integer key, Object action) {
         keyActions.put(key, action);
+    }
+    
+    protected Vector2 getCamPosition() {
+        return new Vector2(camera.position.x-1, camera.position.y-1);
+    }
+    
+    /**
+     * Convert screen coordinates to map ones
+     * @param screenXY Vector2 screen coordinates; value range (-1.0;1.0)
+     * @return Vector2 map coordinates
+     */
+    public Vector2 screenToMap (Vector2 screenXY) {
+        return new Vector2(screenXY.x*TILES_NX/2, screenXY.y*TILES_NY/2).add(getCamPosition());
+    }
+    
+    /**
+     * Convert map coordinates to screen ones
+     * @param screenXY Vector2 map coordinates
+     * @return Vector2 screen coordinates
+     */
+    public Vector2 mapToScreen (Vector2 mapXY) {
+        return mapXY.scl(TILE_SIZE).sub(getCamPosition());
     }
     
     @Override
