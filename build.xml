@@ -30,6 +30,7 @@ zipfileset id="jarfiles" -> the jar files to be merged with the project's classe
         <pathelement location="${libs}/gdx-backend-lwjgl.jar"/>
         <pathelement location="${libs}/gdx-backend-lwjgl-natives.jar"/>
         <pathelement location="${libs}/clojure.jar"/>
+        <pathelement location="${libs}/chlorophytum.jar"/>
     </path>
 
     <property name="main-class" value="shabby.ShabbyDesktop"/>
