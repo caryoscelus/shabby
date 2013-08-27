@@ -10,7 +10,7 @@ path id="classpath" -> the filesets defining the classpath needed to compile the
 zipfileset id="jarfiles" -> the jar files to be merged with the project's classes
 -->
 <project name="hello" default="all" basedir=".">
-    <property name="jar" value="gg"/>
+    <property name="jar" value="shabby"/>
     <property name="distDir" value="dist"/>
     <property name="docDir" value="doc"/>
 
