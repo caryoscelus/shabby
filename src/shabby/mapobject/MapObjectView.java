@@ -23,31 +23,24 @@
  *  for the parts of Clojure used as well as that of the covered work.}
  */
 
-package gg;
+package shabby.mapobject;
+
+import com.badlogic.gdx.graphics.*;
+import com.badlogic.gdx.graphics.g2d.*;
 
 /**
- * Line (option) of StoryDialog: text + event
+ * Represents renderer for map objects
  */
-public class StoryDialogLine {
-    String text;
-    StoryEvent event;
-    public boolean visible;
+public interface MapObjectView {
+    /**
+     * Load all required textures, etc
+     */
+    public void init ();
     
     /**
-     * Simple, visible story line
+     * Render on batch using data
+     * @param batch SpriteBatch to use for rendering
+     * @param data MapObjectViewData to use for rendering
      */
-    public StoryDialogLine (String t, StoryEvent ev) {
-        text = t;
-        event = ev;
-        visible = true;
-    }
-    
-    /**
-     * Optionally visible story line
-     */
-    public StoryDialogLine (String t, StoryEvent ev, boolean v) {
-        text = t;
-        event = ev;
-        visible = v;
-    }
+    public void render (SpriteBatch batch, MapObjectViewData data);
 }

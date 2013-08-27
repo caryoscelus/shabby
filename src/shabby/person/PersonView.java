@@ -23,7 +23,9 @@
  *  for the parts of Clojure used as well as that of the covered work.}
  */
 
-package gg;
+package shabby.person;
+
+import shabby.mapobject.*;
 
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;

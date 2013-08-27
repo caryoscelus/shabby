@@ -23,7 +23,10 @@
  *  for the parts of Clojure used as well as that of the covered work.}
  */
 
-package gg;
+package chlorophytum.story.view;
+
+import chlorophytum.*;
+import chlorophytum.story.*;
 
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.*;
@@ -67,7 +70,7 @@ public class StoryStage extends Stage {
     /**
      * Setup storyStage from dialogue
      */
-    void setupUi (final StoryDialog dialogue) {
+    public void setupUi (final StoryDialog dialogue) {
         final Skin skin = UiManager.instance().skin;
         final Table table = new Table();
         table.setFillParent(true);

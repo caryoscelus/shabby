@@ -23,10 +23,15 @@
  *  for the parts of Clojure used as well as that of the covered work.}
  */
 
-package gg;
+package shabby.person;
+
+import shabby.*;
+import shabby.mapobject.*;
+
+import chlorophytum.story.*;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.maps.*;
+// import com.badlogic.gdx.maps.*;
 import com.badlogic.gdx.maps.tiled.*;
 import com.badlogic.gdx.maps.objects.*;
 import com.badlogic.gdx.math.*;

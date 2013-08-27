@@ -23,7 +23,10 @@
  *  for the parts of Clojure used as well as that of the covered work.}
  */
 
-package gg;
+package shabby.mapobject;
+
+import chlorophytum.*;
+import chlorophytum.story.*;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.*;
@@ -45,13 +48,13 @@ public class MapObject extends StoryObject {
     public final Vector2 position = new Vector2();
     public final Vector2 move = new Vector2();
     
-    Map<String, Vector2> mapPositions = new HashMap();
+    protected Map<String, Vector2> mapPositions = new HashMap();
     
-    static final float DEFAULT_SPEED = 4;
-    static final float ROAD_BOOST = 1.5f;
+    protected static final float DEFAULT_SPEED = 4;
+    protected static final float ROAD_BOOST = 1.5f;
     
-    MapObjectViewData viewData = null;
-    MapObjectView view = null;
+    protected MapObjectViewData viewData = null;
+    protected MapObjectView view = null;
     
     public void render (SpriteBatch batch) {
         view.render(batch, viewData);
@@ -107,7 +110,7 @@ public class MapObject extends StoryObject {
      * Get tile from layer with lid at current position
      * @param lid Layer id to get tile from
      */
-    TiledMapTile getTile (int lid) {
+    protected TiledMapTile getTile (int lid) {
         return getTile(lid, 0, 0);
     }
     
@@ -115,7 +118,7 @@ public class MapObject extends StoryObject {
      * Get tile from layer with name at current position
      * @param name Layer name to get tile from
      */
-    TiledMapTile getTile (String name) {
+    protected TiledMapTile getTile (String name) {
         return getTile(name, 0, 0);
     }
     
@@ -125,7 +128,7 @@ public class MapObject extends StoryObject {
      * @param dx delta x
      * @param dy delta y
      */
-    TiledMapTile getTile (int lid, float dx, float dy) {
+    protected TiledMapTile getTile (int lid, float dx, float dy) {
         if (onMap != null) {
             TiledMapTileLayer layer = (TiledMapTileLayer) onMap.getLayers().get(lid);
             return getTile(layer, dx, dy);
@@ -139,7 +142,7 @@ public class MapObject extends StoryObject {
      * @param dx delta x
      * @param dy delta y
      */
-    TiledMapTile getTile (String name, float dx, float dy) {
+    protected TiledMapTile getTile (String name, float dx, float dy) {
         if (onMap != null) {
             TiledMapTileLayer layer = (TiledMapTileLayer) onMap.getLayers().get(name);
             return getTile(layer, dx, dy);
@@ -153,7 +156,7 @@ public class MapObject extends StoryObject {
      * @param dx delta x
      * @param dy delta y
      */
-    TiledMapTile getTile (TiledMapTileLayer layer, float dx, float dy) {
+    protected TiledMapTile getTile (TiledMapTileLayer layer, float dx, float dy) {
         if (layer != null) {
             int cx = (int) (getCentre().x+dx);
             int cy = (int) (getCentre().y+dy);
@@ -168,7 +171,7 @@ public class MapObject extends StoryObject {
     /**
      * Get centre of this object
      */
-    Vector2 getCentre () {
+    protected Vector2 getCentre () {
         return new Vector2().set(position).add(1, 1);
     }
 }

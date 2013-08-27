@@ -23,11 +23,24 @@
  *  for the parts of Clojure used as well as that of the covered work.}
  */
 
-package gg;
+package chlorophytum;
+
+import chlorophytum.story.*;
 
 /**
- * Interace for MapObjectView's data
+ * World singleton;
+ * Right now contains only Story instance
  */
-public interface MapObjectViewData {
-    public void update (float dt);
+public class World {
+    private static World _instance;
+    
+    public static World instance () {
+        if (_instance == null) {
+            _instance = new World();
+        }
+        return _instance;
+    }
+    
+    public final Story story = new Story();
+    
 }

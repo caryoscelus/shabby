@@ -23,54 +23,31 @@
  *  for the parts of Clojure used as well as that of the covered work.}
  */
 
-package gg;
-
-import com.badlogic.gdx.Gdx;
-
-import clojure.lang.RT;
-import clojure.lang.Var;
-import clojure.lang.Compiler;
-
-import java.io.IOException;
+package chlorophytum.story;
 
 /**
- * Script manager.
- * Now static class.. Maybe make singleton? 
+ * Line (option) of StoryDialog: text + event
  */
-public class Scripting {
+public class StoryDialogLine {
+    public String text;
+    public StoryEvent event;
+    public boolean visible;
+    
     /**
-     * init
+     * Simple, visible story line
      */
-    public static void init () {
-        // if this removed, crash occurs..; could be replaced by access to
-        // any static member of RT though
-        RT.init();
-        
-        // libs
-        run("data/scripts/base.clj");
+    public StoryDialogLine (String t, StoryEvent ev) {
+        text = t;
+        event = ev;
+        visible = true;
     }
     
     /**
-     * Run script with fname
-     * don't run this before init()
+     * Optionally visible story line
      */
-    public static void run (String fname) {
-        try {
-            Compiler.loadFile(fname);
-        } catch (IOException e) {
-            Gdx.app.error("clojure", "can't find file", e);
-        }
-    }
-    
-    /**
-     * Call clojure function "var" from namespace "ns"
-     * No argument passing available atm
-     */
-    public static Object call (String ns, String var) {
-        return RT.var(ns, var).invoke();
-    }
-    
-    public static Object call (Object var) {
-        return ((clojure.lang.AFn)var).invoke();
+    public StoryDialogLine (String t, StoryEvent ev, boolean v) {
+        text = t;
+        event = ev;
+        visible = v;
     }
 }

@@ -23,12 +23,22 @@
  *  for the parts of Clojure used as well as that of the covered work.}
  */
 
-package gg;
+package shabby;
+
+import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
+import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 
 /**
- * Interface for screens capable of story displaying
+ * Startup class
  */
-public interface StoryScreen {
-    public void showStory (StoryDialog dialogue);
-    public void hideStory ();
+public class ShabbyDesktop {
+    public static void main (String[] args) {
+        LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+        config.title = "Gg project";
+        config.vSyncEnabled = true;
+        config.useGL20 = true;
+        config.width = 800;
+        config.height = 600;
+        new LwjglApplication(new Shabby(), config);
+    }
 }

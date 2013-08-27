@@ -23,24 +23,12 @@
  *  for the parts of Clojure used as well as that of the covered work.}
  */
 
-package gg;
-
-import com.badlogic.gdx.graphics.*;
-import com.badlogic.gdx.graphics.g2d.*;
+package chlorophytum.story;
 
 /**
- * Represents renderer for map objects
+ * Interface for screens capable of story displaying
  */
-public interface MapObjectView {
-    /**
-     * Load all required textures, etc
-     */
-    public void init ();
-    
-    /**
-     * Render on batch using data
-     * @param batch SpriteBatch to use for rendering
-     * @param data MapObjectViewData to use for rendering
-     */
-    public void render (SpriteBatch batch, MapObjectViewData data);
+public interface StoryScreen {
+    public void showStory (StoryDialog dialogue);
+    public void hideStory ();
 }

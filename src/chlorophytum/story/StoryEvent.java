@@ -23,48 +23,13 @@
  *  for the parts of Clojure used as well as that of the covered work.}
  */
 
-package gg;
+package chlorophytum.story;
 
-import com.badlogic.gdx.files.*;
-import com.badlogic.gdx.maps.tiled.*;
 import com.badlogic.gdx.Gdx;
 
-import java.util.HashMap;
-
 /**
- * Singleton for loading and storing various data objects
+ * Interface for story events
  */
-public class Loader {
-    private static Loader _instance;
-    
-    Streamer streamer = new Streamer();
-    HashMap<String, TiledMap> maps = new HashMap();
-    
-    public static Loader instance () {
-        if (_instance == null) {
-            _instance = new Loader();
-        }
-        return _instance;
-    }
-    
-    /**
-     * Load any local file by filename
-     * @param fname relative file name
-     */
-    public FileHandle load (String fname) {
-        return Gdx.files.internal(fname);
-    }
-    
-    /**
-     * load map if necessary and return it
-     * @param fname relative file name
-     */
-    public TiledMap loadMap (String fname) {
-        TiledMap map = maps.get(fname);
-        if (map == null) {
-            map = new TmxMapLoader().load(fname);
-            maps.put(fname, map);
-        }
-        return map;
-    }
+public interface StoryEvent {
+    public boolean trigger ();
 }

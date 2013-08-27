@@ -26,7 +26,7 @@
 
 (import 'com.badlogic.gdx.Input$Keys)
 
-(import 'gg.Streamer 'gg.Story)
+(import 'chlorophytum.Streamer 'chlorophytum.story.Story)
 
 (defn setup-input []
       (add-key-handler (Input$Keys/F1) (fn [] (.trigger (get-event "help"))))

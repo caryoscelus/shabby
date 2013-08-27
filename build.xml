@@ -32,7 +32,7 @@ zipfileset id="jarfiles" -> the jar files to be merged with the project's classe
         <pathelement location="${libs}/clojure.jar"/>
     </path>
 
-    <property name="main-class" value="gg.GgDesktop"/>
+    <property name="main-class" value="shabby.ShabbyDesktop"/>
 
     <zipfileset id="jarfiles" dir="." excludes="**"/>
 

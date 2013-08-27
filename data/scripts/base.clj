@@ -24,7 +24,8 @@
 
 (ns story)
 
-(import '(gg Story StoryEvent StoryDialog StoryDialogLine Loader World Streamer)
+(import '(chlorophytum.story Story StoryEvent StoryDialog StoryDialogLine)
+        '(chlorophytum Loader World Streamer)
         '(java.util Vector)
         '(com.badlogic.gdx Gdx))
 

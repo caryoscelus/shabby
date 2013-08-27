@@ -23,7 +23,14 @@
  *  for the parts of Clojure used as well as that of the covered work.}
  */
 
-package gg;
+package shabby;
+
+import shabby.mapobject.*;
+import shabby.person.*;
+
+import chlorophytum.*;
+import chlorophytum.story.*;
+import chlorophytum.story.view.*;
 
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.*;

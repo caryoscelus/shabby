@@ -23,25 +23,48 @@
  *  for the parts of Clojure used as well as that of the covered work.}
  */
 
-package gg;
+package chlorophytum;
+
+import com.badlogic.gdx.files.*;
+import com.badlogic.gdx.maps.tiled.*;
+import com.badlogic.gdx.Gdx;
+
+import java.util.HashMap;
 
 /**
- * Contains all the MapObjectView's.
- * Note: this should be rethinked and reworked
+ * Singleton for loading and storing various data objects
  */
-public class MapObjectViewFactory {
-    private static MapObjectViewFactory _instance;
+public class Loader {
+    private static Loader _instance;
     
-    public static MapObjectViewFactory instance () {
+    Streamer streamer = new Streamer();
+    HashMap<String, TiledMap> maps = new HashMap();
+    
+    public static Loader instance () {
         if (_instance == null) {
-            _instance = new MapObjectViewFactory();
+            _instance = new Loader();
         }
         return _instance;
     }
     
-    public PersonView personView = new PersonView();
+    /**
+     * Load any local file by filename
+     * @param fname relative file name
+     */
+    public FileHandle load (String fname) {
+        return Gdx.files.internal(fname);
+    }
     
-    public void init () {
-        personView.init();
+    /**
+     * load map if necessary and return it
+     * @param fname relative file name
+     */
+    public TiledMap loadMap (String fname) {
+        TiledMap map = maps.get(fname);
+        if (map == null) {
+            map = new TmxMapLoader().load(fname);
+            maps.put(fname, map);
+        }
+        return map;
     }
 }

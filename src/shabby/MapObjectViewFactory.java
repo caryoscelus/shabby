@@ -23,13 +23,27 @@
  *  for the parts of Clojure used as well as that of the covered work.}
  */
 
-package gg;
+package shabby;
 
-import com.badlogic.gdx.Gdx;
+import shabby.person.*;
 
 /**
- * Interface for story events
+ * Contains all the MapObjectView's.
+ * Note: this should be rethinked and reworked
  */
-public interface StoryEvent {
-    public boolean trigger ();
+public class MapObjectViewFactory {
+    private static MapObjectViewFactory _instance;
+    
+    public static MapObjectViewFactory instance () {
+        if (_instance == null) {
+            _instance = new MapObjectViewFactory();
+        }
+        return _instance;
+    }
+    
+    public PersonView personView = new PersonView();
+    
+    public void init () {
+        personView.init();
+    }
 }

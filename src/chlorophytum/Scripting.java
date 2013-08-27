@@ -23,19 +23,54 @@
  *  for the parts of Clojure used as well as that of the covered work.}
  */
 
-package gg;
+package chlorophytum;
 
-public class PersonViewData implements MapObjectViewData {
-    Person origin;
-    
-    float tc;
-    
-    public PersonViewData (Person person) {
-        origin = person;
+import com.badlogic.gdx.Gdx;
+
+import clojure.lang.RT;
+import clojure.lang.Var;
+import clojure.lang.Compiler;
+
+import java.io.IOException;
+
+/**
+ * Script manager.
+ * Now static class.. Maybe make singleton? 
+ */
+public class Scripting {
+    /**
+     * init
+     */
+    public static void init () {
+        // if this removed, crash occurs..; could be replaced by access to
+        // any static member of RT though
+        RT.init();
+        
+        // libs
+        run("data/scripts/base.clj");
     }
     
-    @Override
-    public void update (float dt) {
-        tc += dt;
+    /**
+     * Run script with fname
+     * don't run this before init()
+     */
+    public static void run (String fname) {
+        try {
+            Compiler.loadFile(fname);
+        } catch (IOException e) {
+            Gdx.app.error("clojure", "can't find file", e);
+        }
+    }
+    
+    /**
+     * Call clojure function "var" from namespace "ns"
+     * No argument passing available atm
+     */
+    public static Object call (String ns, String var) {
+        return RT.var(ns, var).invoke();
+    }
+    
+    public static Object call (Object var) {
+        return ((clojure.lang.AFn)var).invoke();
     }
 }

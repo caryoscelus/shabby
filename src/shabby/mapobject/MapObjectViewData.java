@@ -23,22 +23,11 @@
  *  for the parts of Clojure used as well as that of the covered work.}
  */
 
-package gg;
+package shabby.mapobject;
 
 /**
- * World singleton;
- * Right now contains only Story instance
+ * Interace for MapObjectView's data
  */
-public class World {
-    private static World _instance;
-    
-    public static World instance () {
-        if (_instance == null) {
-            _instance = new World();
-        }
-        return _instance;
-    }
-    
-    public final Story story = new Story();
-    
+public interface MapObjectViewData {
+    public void update (float dt);
 }

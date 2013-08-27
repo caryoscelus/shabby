@@ -23,12 +23,12 @@
  *  for the parts of Clojure used as well as that of the covered work.}
  */
 
-package gg;
+package shabby;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 
-public class Gg extends Game {
+public class Shabby extends Game {
     MapScreen mapScreen = new MapScreen();
     
     @Override

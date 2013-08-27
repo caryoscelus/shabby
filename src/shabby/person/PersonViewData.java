@@ -23,11 +23,21 @@
  *  for the parts of Clojure used as well as that of the covered work.}
  */
 
-package gg;
+package shabby.person;
 
-/**
- * Root class for story objects, currently empty
- */
-public class StoryObject {
+import shabby.mapobject.*;
+
+public class PersonViewData implements MapObjectViewData {
+    Person origin;
     
+    float tc;
+    
+    public PersonViewData (Person person) {
+        origin = person;
+    }
+    
+    @Override
+    public void update (float dt) {
+        tc += dt;
+    }
 }

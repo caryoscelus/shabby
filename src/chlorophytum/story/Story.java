@@ -23,7 +23,9 @@
  *  for the parts of Clojure used as well as that of the covered work.}
  */
 
-package gg;
+package chlorophytum.story;
+
+import chlorophytum.*;
 
 import com.badlogic.gdx.Gdx;
 

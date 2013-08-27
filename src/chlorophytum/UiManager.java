@@ -23,7 +23,7 @@
  *  for the parts of Clojure used as well as that of the covered work.}
  */
 
-package gg;
+package chlorophytum;
 
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
@@ -49,7 +49,7 @@ public class UiManager {
     /**
      * Init; probably move to constructor? 
      */
-    void init () {
+    public void init () {
         initUiSkins();
     }
     
