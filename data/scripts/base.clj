@@ -97,8 +97,3 @@
 (defn play-loop [fname]
       (.load (Streamer/instance) fname)
       (.play (Streamer/instance)))
-
-
-;; input
-(defn add-key-handler [tkey action]
-      (.registerKeyAction (.keyboardHandler (.screen (Story/instance))) tkey action))

@@ -21,19 +21,8 @@
 ;;  for a non-source form of such a combination shall include the source code
 ;;  for the parts of Clojure used as well as that of the covered work.}
 
-(ns input
-    (:use [story :only (get-event log)]))
 
-(import 'com.badlogic.gdx.Input$Keys)
+(ns input)
 
-(import 'chlorophytum.Streamer 'chlorophytum.story.Story)
-
-(defn setup-input []
-      (add-key-handler (Input$Keys/F1) (fn [] (.trigger (get-event "help"))))
-      (add-key-handler (Input$Keys/F2) (fn []
-                                           (let [st (Streamer/instance)]
-                                                (if (.isEnabled st)
-                                                    (.disable st)
-                                                    (.enable st)))))
-      (add-key-handler (Input$Keys/SPACE) (fn []
-                                              (.clicked (.person (.screen (Story/instance)))))))
+(defn add-key-handler [tkey action]
+      (.registerKeyAction (.keyboardHandler (.screen (Story/instance))) tkey action))

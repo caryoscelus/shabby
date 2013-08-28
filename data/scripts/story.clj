@@ -62,7 +62,7 @@ All my relaxation disappeared right away.."))
  (lnh "Ok, here's your monies"
       (t "Thanks, but i won't give you anything for this.."))
  (ln "..."
-     (fn [] false))
+     nil)
 )))
 
 
@@ -81,7 +81,7 @@ Controls:^
 Good luck!"
 (list
  (ln "Intro" (ev "intro"))
- (ln "Close" (event (fn [] false)))
+ (ln "Close" nil)
 )))
 
 (bind "_init" (ev "help"))
