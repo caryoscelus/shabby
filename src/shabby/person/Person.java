@@ -105,6 +105,13 @@ public class Person extends MapObject {
                 }
             }
             
+            tile = getTile("quests");
+            if (tile != null) {
+                if (Boolean.parseBoolean(tile.getProperties().get("auto", "", String.class))) {
+                    processStory(tile);
+                }
+            }
+            
             position.x += dx;
             position.y += dy;
         } else {
@@ -127,12 +134,18 @@ public class Person extends MapObject {
     public void clicked (float dx, float dy) {
         TiledMapTile tile = getTile("quests", dx, dy);
         if (tile != null) {
-            String tname = tile.getProperties().get("name", String.class);
-            if (tname != null) {
-                story(tname);
-            } else {
-                Gdx.app.log("story", "no story name here; ids not supported anymore");
+            if (Boolean.parseBoolean(tile.getProperties().get("clickable", "", String.class))) {
+                processStory(tile);
             }
+        }
+    }
+    
+    protected void processStory (TiledMapTile tile) {
+        String tname = tile.getProperties().get("name", String.class);
+        if (tname != null) {
+            story(tname);
+        } else {
+            Gdx.app.log("story", "no story name here; ids not supported anymore");
         }
     }
     

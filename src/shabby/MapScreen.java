@@ -98,14 +98,14 @@ public class MapScreen implements Screen, StoryScreen {
     /**
      * Init scripting
      */
-    void initScripting () {
+    protected void initScripting () {
         Scripting.init();
     }
     
     /**
      * Init ui
      */
-    void initUi () {
+    protected void initUi () {
         // UI
         UiManager.instance().init();
         
@@ -136,7 +136,7 @@ public class MapScreen implements Screen, StoryScreen {
     /**
      * Init gameplay and story; move to gameplay management
      */
-    void initGame () {
+    protected void initGame () {
         person = new Person();
         person.moveTo("data/maps/map.tmx", new Vector2(50, 50));
         Story.instance().init();
