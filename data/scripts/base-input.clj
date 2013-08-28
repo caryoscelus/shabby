@@ -24,5 +24,7 @@
 
 (ns input)
 
+(import 'chlorophytum.story.Story)
+
 (defn add-key-handler [tkey action]
       (.registerKeyAction (.keyboardHandler (.screen (Story/instance))) tkey action))

@@ -99,9 +99,7 @@ public class MapScreen implements Screen, StoryScreen {
         stage = new Stage();
         
         keyboardHandler = new KeyboardHandler();
-        
-        Scripting.run("data/scripts/input.clj");
-        Scripting.call("input", "setup-input");
+        keyboardHandler.init();
         
         // Input
         inputMultiplexer = new InputMultiplexer();
