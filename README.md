@@ -10,7 +10,8 @@ Current status: early development, but runnable
 Dependencies
 ------------
 First of all, you need Chlorophytum. Compile it and put jar into libs/ directory.
-You'll also need to put libgdx and clojure jars into libs/ directory.
+(or you can just put it alongside shabby source and run "ant runup" instead; see
+below). You'll also need to put libgdx and clojure jars into libs/ directory.
 
 Building & running
 ------------------
@@ -18,6 +19,11 @@ From root directory run:
 * "ant runfast" - will build & run
 * "ant justrun" - will only run (need to be build previously)
 * "ant jar" - will build a jar
+* "ant bundle" - build bundle jar containing content of dependency jars
+* "ant runup" - if you have placed chlorophytum source alongside shabby, this will
+    build chlorophytum jar first and then run runfast; note that you should either
+    copy jar (or edit build.xml to do it for you) or (preferably) make a symlink
+    to it.
 
 License
 -------

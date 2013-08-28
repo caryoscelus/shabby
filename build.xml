@@ -205,6 +205,13 @@ zipfileset id="jarfiles" -> the jar files to be merged with the project's classe
         <java fork="true" jar="${distDir}/bundle.jar"/>
     </target>
     
+    <target name="chlorophytum">
+        <ant dir="../chlorophytum/" inheritAll="false"/>
+    </target>
+    
+    <target name="runup" depends="chlorophytum,runfast">
+    </target>
+    
     <target name="doc" depends="init" description="generate documentation">
         <javadoc sourcepathref="src" destdir="${docDir}"/>
     </target>
