@@ -206,8 +206,6 @@ public class MapScreen implements Screen, StoryScreen {
         mapStage.act(dt);
         mapStage.draw();
         
-        person.render(mapStage.renderer.getSpriteBatch());
-        
         if (storyStage.show) {
             storyStage.act(dt);
             storyStage.draw();
