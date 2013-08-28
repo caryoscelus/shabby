@@ -7,65 +7,11 @@
  <tileset firstgid="1" name="tiles-bar" tilewidth="16" tileheight="16">
   <image source="tiles-bar.png" width="800" height="600"/>
  </tileset>
- <tileset firstgid="1851" name="quest-tiles" tilewidth="16" tileheight="16">
-  <image source="quest-tiles.png" width="96" height="16"/>
-  <tile id="0">
-   <properties>
-    <property name="name" value="oasis"/>
-   </properties>
-  </tile>
-  <tile id="4">
-   <properties>
-    <property name="name" value="bar-out"/>
-   </properties>
-  </tile>
-  <tile id="5">
-   <properties>
-    <property name="name" value="barman"/>
-   </properties>
-  </tile>
- </tileset>
+ <tileset firstgid="1851" source="quest-tiles.tsx"/>
  <tileset firstgid="1857" name="char-2" tilewidth="16" tileheight="16">
   <image source="char-2.png" width="800" height="600"/>
  </tileset>
- <tileset firstgid="3707" name="gameplay-tiles" tilewidth="16" tileheight="16">
-  <image source="gameplay-tiles.png" width="800" height="600"/>
-  <tile id="0">
-   <properties>
-    <property name="status" value="empty"/>
-   </properties>
-  </tile>
-  <tile id="1">
-   <properties>
-    <property name="status" value="unpassable"/>
-   </properties>
-  </tile>
-  <tile id="2">
-   <properties>
-    <property name="status" value="road"/>
-   </properties>
-  </tile>
-  <tile id="3">
-   <properties>
-    <property name="status" value="enter"/>
-   </properties>
-  </tile>
-  <tile id="4">
-   <properties>
-    <property name="status" value="oasis"/>
-   </properties>
-  </tile>
-  <tile id="5">
-   <properties>
-    <property name="status" value="spawn"/>
-   </properties>
-  </tile>
-  <tile id="6">
-   <properties>
-    <property name="status" value="mapborder"/>
-   </properties>
-  </tile>
- </tileset>
+ <tileset firstgid="3707" source="gameplay-tiles.tsx"/>
  <layer name="black" width="32" height="32">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAA+3BAQ0AAADCoPdPbQ8HFAAAAPBuEQAcxwAQAAA=

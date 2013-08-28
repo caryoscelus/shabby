@@ -6,77 +6,8 @@
  <tileset firstgid="1851" name="char-1" tilewidth="16" tileheight="16">
   <image source="char-1.png" width="800" height="600"/>
  </tileset>
- <tileset firstgid="3701" name="gameplay-tiles" tilewidth="16" tileheight="16">
-  <image source="gameplay-tiles.png" width="800" height="600"/>
-  <tile id="0">
-   <properties>
-    <property name="status" value="empty"/>
-   </properties>
-  </tile>
-  <tile id="1">
-   <properties>
-    <property name="status" value="unpassable"/>
-   </properties>
-  </tile>
-  <tile id="2">
-   <properties>
-    <property name="status" value="road"/>
-   </properties>
-  </tile>
-  <tile id="3">
-   <properties>
-    <property name="status" value="enter"/>
-   </properties>
-  </tile>
-  <tile id="4">
-   <properties>
-    <property name="status" value="oasis"/>
-   </properties>
-  </tile>
-  <tile id="5">
-   <properties>
-    <property name="status" value="spawn"/>
-   </properties>
-  </tile>
-  <tile id="6">
-   <properties>
-    <property name="status" value="mapborder"/>
-   </properties>
-  </tile>
- </tileset>
- <tileset firstgid="5551" name="quest-tiles" tilewidth="16" tileheight="16">
-  <image source="quest-tiles.png" width="96" height="16"/>
-  <tile id="0">
-   <properties>
-    <property name="name" value="oasis"/>
-   </properties>
-  </tile>
-  <tile id="1">
-   <properties>
-    <property name="name" value="broken"/>
-   </properties>
-  </tile>
-  <tile id="2">
-   <properties>
-    <property name="name" value="oldman"/>
-   </properties>
-  </tile>
-  <tile id="3">
-   <properties>
-    <property name="name" value="bar"/>
-   </properties>
-  </tile>
-  <tile id="4">
-   <properties>
-    <property name="name" value="bar-out"/>
-   </properties>
-  </tile>
-  <tile id="5">
-   <properties>
-    <property name="name" value="barman"/>
-   </properties>
-  </tile>
- </tileset>
+ <tileset firstgid="3701" source="gameplay-tiles.tsx"/>
+ <tileset firstgid="5551" source="quest-tiles.tsx"/>
  <layer name="tiles 2" width="256" height="256">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAA+3b1REcBAAA0Yt0gcZd0C7QuAvaBU4S4i5oF2jcBe0CjRsR2C5ubuZ97OcrYXeOGQx21e7aU3trX+2vA3WwDtWn9Vl9Xl/Ul/VV7eR5fmT9yTpVp+tMna1zdb4u1MW6VD/WT/Vz/VK/1m88z4+0v1m36nbdqbv1b92r+/WgHtZ/NRg7GIypsTWuxo/leX6U/bSaXjNqZs2q2TWn5ta8ml9P1dP1TD1bz9XzPM+PtF9Wy2tFraxVtbrW1NpaV+vrtXq93qg36616m+f5kfaba0ttrW21vXbUztpVu2tP7a19tb8O1ME6xPP8SPvDdaSO1rE6XifqZJ2q03Wmzta5Ol8X6mJd4nl+pP3lulJX61pdrxt1s27V7bpTd+vfulf360E95Hl+pP2EcYPBxJpUk2tKTa1pNb1m1MyaVbNrTs2teTV/HM/zo+wX1MJaVItrSS2tZbW8VtTKWlWra02trXW1nuf5kfYf1ce1oTbWpvqkNteW2lrbanvtqJ21q3bXHp7nR9p/Xd/Ut/VdfV8/1OE6UkfrWB2vE3WyTtXpOsPz/Ej73+uP+rP+qr/rn7pcV+pqXavrdaNu1q26XXd4nh9p/8j4weDReqweryfqyZpQE2tSTa4pNbWm1fSaUTPH8zw/yv6FerFeqpfrlXq1FtTCWlSLa0ktrWW1vFbUSp7nR9q/U+/We/V+fVAf1kf1cW2ojbWpPqnNtaW21jae50faD/s/5nne/8/zvP+f53n/P8/z/n+e5/3/PM/7/3me9//zPO//53ne/8/zvP+f53n/P8/z/n+e5/3/PM/7/3me9//zPD/8/5jnef8/z/P+f57n/f88z/v/eZ73//M87//ned7/z/O8/5/nef8/z/P+f57n/f88z/v/eZ73//M87//ned7/z/P88P9jnuf9/zzP+/95nvf/8zzv/+d53v/P87z/n+d5/z/P8/5/nuf9/zzP+/95nvf/8zzv/+d53v/P87z/n+d5/z/P88P/j3me9//zPO//53ne/8/zvP+f53n/P8/z/n+e5/3/PM/7/3me9//zPO//53ne/8/zvP+f53n/P8/z/n+e5/3/PM8P/z/med7/z/O8/5/nef8/z/P+f57n/f88z/v/eZ73//M87//ned7/z/O8/5/nef8/z/P+f57n/f88z/v/eZ73//M8P/z/mOd5/z/P8/5/nuf9/zzP+/95nvf/8zzv/+d53v/P87z/n+d5/z/P8/5/nuf9/zzP+/95nvf/8zzv/+d53v/P8/zw/2Oe5/3/PM/7/3me9//zPO//53ne/8/zvP+f53n/P8/z/n+e5/3/PM/7/3me9//zPO//53ne/8/zvP+f53n/P8/zw/+PeZ73//M87//ned7/z/O8/5/nef8/z/P+f57n/f88z/v/eZ73//M87//ned7/z/O8/5/nef8/z/P+f57n/f88zw//P+Z53v/P87z/n+d5/z/P8/5/nuf9/zzP+/95nvf/8zzv/+d53v/P87z/n+d5/z/P8/5/nuf9/zzP+/95nvf/8zw//P+Y53n/P8/z/n+e5/3/PM/7/3me9//zPO//53ne/8/zvP+f53n/P8/z/n+e5/3/PM/7/3me9//zPO//53ne/8/z/PD/Y57n/f88z/v/eZ73//M87//ned7/z/O8/5/nef8/z/P+f57n/f88z/v/eZ73//M87//ned7/z/O8/5/nef8/z/PD/495nvf/8zzv/+d53v/P87z/n+d5/z/P8/5/nuf9/zzP+/95nvf/8zzv/+d53v/P87z/n+d5/z/P8/5/nuf9/zzPD/8/5nne/8/zvP+f53n/P8/z/n+e5/3/PM/7/3me9//zPO//53ne/8/zvP+f53n/P8/z/n+e5/3/PM/7/3me9//zPD/8/5jnef8/z/P+f57n/f88z/v/eZ73//M87//ned7/z/O8/5/nef8/z/P+f57n/f88z/v/eZ73//M87//ned7/z/P88P9jnuf9/zzP+/95nvf/8zzv/+d53v/P87z/n+d5/z/P8/5/nuf9/zzP+/95nvf/8zzv/+d53v/P87z/n+d5/z/P84PB/4fb/xkAAAQA
