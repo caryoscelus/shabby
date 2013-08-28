@@ -23,11 +23,11 @@
  *  for the parts of Clojure used as well as that of the covered work.}
  */
 
-package shabby.mapobject;
+package shabby.objects;
 
-/**
- * Interace for MapObjectView's data
- */
-public interface MapObjectViewData {
-    public void update (float dt);
+import chlorophytum.mapobject.*;
+
+public class ShabbyObject extends MapObject {
+    protected static final float DEFAULT_SPEED = 4;
+    protected static final float ROAD_BOOST = 1.5f;
 }

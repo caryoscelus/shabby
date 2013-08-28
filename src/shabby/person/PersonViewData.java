@@ -25,7 +25,7 @@
 
 package shabby.person;
 
-import shabby.mapobject.*;
+import chlorophytum.mapobject.*;
 
 public class PersonViewData implements MapObjectViewData {
     Person origin;

@@ -25,7 +25,7 @@
 
 package shabby.person;
 
-import shabby.mapobject.*;
+import chlorophytum.mapobject.*;
 
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;

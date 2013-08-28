@@ -25,7 +25,6 @@
 
 package shabby;
 
-import shabby.mapobject.*;
 import shabby.person.*;
 
 import chlorophytum.*;

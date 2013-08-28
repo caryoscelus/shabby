@@ -26,7 +26,7 @@
 package shabby.person;
 
 import shabby.*;
-import shabby.mapobject.*;
+import shabby.objects.*;
 
 import chlorophytum.story.*;
 
@@ -44,7 +44,7 @@ import java.util.HashMap;
  * Player's person.
  * Needs some cleaning..
  */
-public class Person extends MapObject {
+public class Person extends ShabbyObject {
     // gfx state
     int direction = 0;
     enum State {
