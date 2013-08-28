@@ -27,7 +27,67 @@ package shabby.objects;
 
 import chlorophytum.mapobject.*;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.maps.tiled.*;
+
 public class ShabbyObject extends MapObject {
     protected static final float DEFAULT_SPEED = 4;
     protected static final float ROAD_BOOST = 1.5f;
+    
+    public int direction = 0;
+    public enum State {
+        Stand, Run
+    }
+    public State state = State.Stand;
+    
+    @Override
+    public void update(float dt) {
+        super.update(dt);
+        
+        viewData.update(dt);
+        if (move.x != 0 || move.y != 0) {
+            int angle = ((int) move.angle()/45) * 45;
+            float dx = (float) Math.cos(angle*Math.PI/180) * dt * DEFAULT_SPEED;
+            float dy = (float) Math.sin(angle*Math.PI/180) * dt * DEFAULT_SPEED;
+            
+            direction = angle / 45;
+            state = State.Run;
+            
+            // check ground
+            TiledMapTile tile;
+            tile = getTile("gameplay");
+            if (tile != null) {
+                final String tid = tile.getProperties().get("status", String.class);
+                if (tid != null) {
+                    switch (tid) {
+                        case "road":
+                            dx *= ROAD_BOOST;
+                            dy *= ROAD_BOOST;
+                            break;
+                    }
+                }
+            } else {
+                Gdx.app.error("Person.update", "not on map or no feature");
+            }
+            
+            tile = getTile("gameplay", dx, dy);
+            if (tile != null) {
+                final String tid = tile.getProperties().get("status", String.class);
+                if (tid != null) {
+                    switch (tid) {
+                        case "unpassable":
+                        case "oasis":
+                        case "mapborder":
+                            dx = 0;
+                            dy = 0;
+                            break;
+                    }
+                }
+            }
+            
+            if (dx != 0 || dy != 0) {
+                move(dx, dy);
+            }
+        }
+    }
 }

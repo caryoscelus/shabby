@@ -46,12 +46,6 @@ import java.util.HashMap;
  */
 public class Person extends ShabbyObject {
     // gfx state
-    int direction = 0;
-    enum State {
-        Stand, Run
-    }
-    State state = State.Stand;
-    
     public Person () {
         viewData = new PersonViewData(this);
         view = MapObjectViewFactory.instance().personView;
@@ -62,60 +56,22 @@ public class Person extends ShabbyObject {
      * Needs cleaning
      * @param dt float time delta in seconds
      */
+    @Override
     public void update (float dt) {
-        viewData.update (dt);
+        // state will be fixed to Run after super.update() call if needed
+        state = State.Stand;
+        super.update(dt);
+    }
+    
+    @Override
+    public void moved () {
+        state = State.Run;
         
-        if (move.x != 0 || move.y != 0) {
-            int angle = ((int) move.angle()/45) * 45;
-            float dx = (float) Math.cos(angle*Math.PI/180) * dt * DEFAULT_SPEED;
-            float dy = (float) Math.sin(angle*Math.PI/180) * dt * DEFAULT_SPEED;
-            
-            direction = angle / 45;
-            state = State.Run;
-            
-            // check ground
-            TiledMapTile tile;
-            tile = getTile("gameplay");
-            if (tile != null) {
-                final String tid = tile.getProperties().get("status", String.class);
-                if (tid != null) {
-                    switch (tid) {
-                        case "road":
-                            dx *= ROAD_BOOST;
-                            dy *= ROAD_BOOST;
-                            break;
-                    }
-                }
-            } else {
-                Gdx.app.error("Person.update", "not on map or no feature");
+        TiledMapTile tile = getTile("quests");
+        if (tile != null) {
+            if (Boolean.parseBoolean(tile.getProperties().get("auto", "", String.class))) {
+                processStory(tile);
             }
-            
-            tile = getTile("gameplay", dx, dy);
-            if (tile != null) {
-                final String tid = tile.getProperties().get("status", String.class);
-                if (tid != null) {
-                    switch (tid) {
-                        case "unpassable":
-                        case "oasis":
-                        case "mapborder":
-                            dx = 0;
-                            dy = 0;
-                            break;
-                    }
-                }
-            }
-            
-            tile = getTile("quests");
-            if (tile != null) {
-                if (Boolean.parseBoolean(tile.getProperties().get("auto", "", String.class))) {
-                    processStory(tile);
-                }
-            }
-            
-            position.x += dx;
-            position.y += dy;
-        } else {
-            state = State.Stand;
         }
     }
     
