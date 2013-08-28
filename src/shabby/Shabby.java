@@ -26,6 +26,7 @@
 package shabby;
 
 import chlorophytum.Scripting;
+import chlorophytum.UiManager;
 import chlorophytum.credits.CreditsScreen;
 
 import com.badlogic.gdx.Game;
@@ -38,6 +39,7 @@ public class Shabby extends Game {
     @Override
     public void create () {
         Scripting.init();
+        UiManager.instance().init();
         
         setScreen(creditsScreen);
 //         setScreen(mapScreen);

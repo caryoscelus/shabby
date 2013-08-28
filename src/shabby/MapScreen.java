@@ -92,8 +92,6 @@ public class MapScreen implements Screen, StoryScreen {
      */
     protected void initUi () {
         // UI
-        UiManager.instance().init();
-        
         Story.instance().screen = this;
         Story.instance().addObject("self", person);
         storyStage = new StoryStage();
