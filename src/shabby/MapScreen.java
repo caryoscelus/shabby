@@ -31,6 +31,7 @@ import shabby.person.*;
 import chlorophytum.*;
 import chlorophytum.story.*;
 import chlorophytum.story.view.*;
+import chlorophytum.map.view.*;
 
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.*;
@@ -38,7 +39,6 @@ import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.maps.tiled.*;
-import com.badlogic.gdx.maps.tiled.renderers.*;
 import com.badlogic.gdx.math.*;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -49,10 +49,6 @@ import java.lang.Math;
  * Main game screen: map screen
  */
 public class MapScreen implements Screen, StoryScreen {
-    // renderers
-    protected OrthogonalTiledMapRenderer renderer;
-    protected OrthographicCamera camera;
-    
     protected final float TILES_NX = 25;
     protected final float TILES_NY = TILES_NX*3/4f;
     
@@ -72,6 +68,7 @@ public class MapScreen implements Screen, StoryScreen {
     public KeyboardHandler keyboardHandler;
     
     // UI
+    protected MapStage mapStage;
     protected StoryStage storyStage;
     protected Stage stage;
     
@@ -86,11 +83,8 @@ public class MapScreen implements Screen, StoryScreen {
      * Init map renderer; TODO: move to map renderer class
      */
     protected void initRenderer () {
-        renderer = new OrthogonalTiledMapRenderer(map, 1 / TILE_SIZE);
-        
-        camera = new OrthographicCamera();
-        camera.setToOrtho(false, TILES_NX, TILES_NY);
-        camera.update();
+        mapStage = new MapStage();
+        mapStage.init(TILE_SIZE, TILES_NX, TILES_NY);
         
         MapObjectViewFactory.instance().init();
     }
@@ -161,7 +155,7 @@ public class MapScreen implements Screen, StoryScreen {
     void update(float dt) {
         if (map != person.onMap) {
             map = person.onMap;
-            renderer.setMap(map);
+            mapStage.setMap(map);
         }
         
         keyboardHandler.update(dt);
@@ -192,7 +186,7 @@ public class MapScreen implements Screen, StoryScreen {
     }
     
     protected Vector2 getCamPosition() {
-        return new Vector2(camera.position.x-1, camera.position.y-1);
+        return mapStage.getCamPosition();
     }
     
     /**
@@ -220,14 +214,11 @@ public class MapScreen implements Screen, StoryScreen {
         Gdx.gl.glClearColor(0.0f, 0.0f, 0.0f, 1);
         Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
         
-        camera.position.x = person.position.x + 1;
-        camera.position.y = person.position.y - 1;
-        camera.update();
+        mapStage.setPosition(new Vector2(person.position.x + 1, person.position.y - 1));
+        mapStage.act(dt);
+        mapStage.draw();
         
-        renderer.setView(camera);
-        renderer.render();
-        
-        person.render(renderer.getSpriteBatch());
+        person.render(mapStage.renderer.getSpriteBatch());
         
         if (storyStage.show) {
             storyStage.act(dt);
