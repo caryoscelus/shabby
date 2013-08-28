@@ -31,7 +31,6 @@ import shabby.objects.*;
 import chlorophytum.story.*;
 
 import com.badlogic.gdx.Gdx;
-// import com.badlogic.gdx.maps.*;
 import com.badlogic.gdx.maps.tiled.*;
 import com.badlogic.gdx.maps.objects.*;
 import com.badlogic.gdx.math.*;

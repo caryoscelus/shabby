@@ -46,32 +46,31 @@ public class Shabby extends Game {
         creditsScreen.onExit = new Invokable() {
             @Override
             public void invoke () {
-                Gdx.app.log("hello", "hello");
                 setScreen(mapScreen);
             }
         };
     }
-
+    
     @Override
     public void render () {
         getScreen().render(Gdx.graphics.getDeltaTime());
     }
-
+    
     @Override
     public void resize (int width, int height) {
         getScreen().resize(width, height);
     }
-
+    
     @Override
     public void pause () {
         getScreen().pause();
     }
-
+    
     @Override
     public void resume () {
         getScreen().resume();
     }
-
+    
     @Override
     public void dispose () {
         getScreen().dispose();

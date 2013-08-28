@@ -30,6 +30,7 @@ import shabby.person.*;
 import chlorophytum.*;
 import chlorophytum.story.*;
 import chlorophytum.story.view.*;
+import chlorophytum.map.*;
 import chlorophytum.map.view.*;
 
 import com.badlogic.gdx.*;
@@ -54,7 +55,7 @@ public class MapScreen implements Screen, StoryScreen {
     protected final float TILE_SIZE = 16;
     
     // data
-    protected TiledMap map;
+    protected ChloroMap map;
     
     // gameplay
     public Person person;
@@ -67,7 +68,7 @@ public class MapScreen implements Screen, StoryScreen {
     public KeyboardHandler keyboardHandler;
     
     // UI
-    protected MapStage mapStage;
+    protected ChloroMapStage mapStage;
     protected StoryStage storyStage;
     protected Stage stage;
     
@@ -81,7 +82,7 @@ public class MapScreen implements Screen, StoryScreen {
      * Init map stage
      */
     protected void initRenderer () {
-        mapStage = new MapStage();
+        mapStage = new ChloroMapStage();
         mapStage.init(TILE_SIZE, TILES_NX, TILES_NY);
         
         MapObjectViewFactory.instance().init();
