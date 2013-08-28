@@ -44,42 +44,36 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import java.lang.Math;
-import java.util.Map;
-import java.util.HashMap;
 
 /**
  * Main game screen: map screen
  */
 public class MapScreen implements Screen, StoryScreen {
     // renderers
-    OrthogonalTiledMapRenderer renderer;
-    OrthographicCamera camera;
+    protected OrthogonalTiledMapRenderer renderer;
+    protected OrthographicCamera camera;
     
-    final float TILES_NX = 25;
-    final float TILES_NY = TILES_NX*3/4f;
+    protected final float TILES_NX = 25;
+    protected final float TILES_NY = TILES_NX*3/4f;
     
-    final float TILE_SIZE = 16;
+    protected final float TILE_SIZE = 16;
     
     // data
-    TiledMap map;
-    
-    Texture personSprite;
+    protected TiledMap map;
     
     // gameplay
     public Person person;
     
-    
-    boolean inited = false;
+    protected boolean inited = false;
     
     // input
-    Map<Integer,Boolean> pressed = new HashMap();
-    Map<Integer,Object> keyActions = new HashMap();
+    protected InputMultiplexer inputMultiplexer;
     
-    InputMultiplexer inputMultiplexer;
+    public KeyboardHandler keyboardHandler;
     
     // UI
-    StoryStage storyStage;
-    Stage stage;
+    protected StoryStage storyStage;
+    protected Stage stage;
     
     public void init () {
         initRenderer();
@@ -91,7 +85,7 @@ public class MapScreen implements Screen, StoryScreen {
     /**
      * Init map renderer; TODO: move to map renderer class
      */
-    void initRenderer () {
+    protected void initRenderer () {
         renderer = new OrthogonalTiledMapRenderer(map, 1 / TILE_SIZE);
         
         camera = new OrthographicCamera();
@@ -120,6 +114,8 @@ public class MapScreen implements Screen, StoryScreen {
         storyStage = new StoryStage();
         
         stage = new Stage();
+        
+        keyboardHandler = new KeyboardHandler();
         
         Scripting.run("data/scripts/input.clj");
         Scripting.call("input", "setup-input");
@@ -151,8 +147,6 @@ public class MapScreen implements Screen, StoryScreen {
         if (!inited) {
             init();
         }
-        
-        updateStoryStage();
     }
     
     @Override
@@ -169,6 +163,8 @@ public class MapScreen implements Screen, StoryScreen {
             map = person.onMap;
             renderer.setMap(map);
         }
+        
+        keyboardHandler.update(dt);
         
         // check movement
         float mdx = 0, mdy = 0;
@@ -188,28 +184,11 @@ public class MapScreen implements Screen, StoryScreen {
         person.move.x = mdx;
         person.move.y = mdy;
         person.update(dt);
-        
-        for (Map.Entry<Integer, Object> entry : keyActions.entrySet()) {
-            Integer key = entry.getKey();
-            Object action = entry.getValue();
-            if (Gdx.input.isKeyPressed(key)) {
-                if (!pressed.get(key)) {
-                    pressed.put(key, true);
-                    Scripting.call(action);
-                }
-            } else {
-                pressed.put(key, false);
-            }
-        }
     }
     
     public void processClick (float x, float y) {
         Vector2 t = screenToMap(new Vector2(x, y)).sub(person.position);
         person.clicked(t.x, t.y);
-    }
-    
-    public void registerKeyAction (Integer key, Object action) {
-        keyActions.put(key, action);
     }
     
     protected Vector2 getCamPosition() {
@@ -275,15 +254,6 @@ public class MapScreen implements Screen, StoryScreen {
     
     
     // UI
-    /**
-     * Setup inputprocessor to storyStage if present
-     */
-    void updateStoryStage () {
-        if (storyStage.show) {
-            Gdx.input.setInputProcessor(storyStage);
-        }
-    }
-    
     @Override
     public void showStory (StoryDialog dialogue) {
         if (storyStage.show) {
@@ -293,14 +263,11 @@ public class MapScreen implements Screen, StoryScreen {
         storyStage.show = true;
         
         storyStage.setupUi(dialogue);
-        
-        updateStoryStage();
     }
     
     @Override
     public void hideStory () {
         storyStage.show = false;
-        updateStoryStage();
         storyStage.clear();
     }
 }
