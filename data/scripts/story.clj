@@ -39,8 +39,12 @@ All my relaxation disappeared right away.."))
 "I found abandoned house. Walls are partly "))
 
 
-(bind "bar" (fn []
-                  (change-map "data/maps/bar.tmx")))
+(bind "bar" (t
+"Want to go to the bar?"
+(list
+ (ln "Sure"
+     (fn [] (change-map "data/maps/bar.tmx")))
+ (ln "Not now" nil))))
 
 (bind "bar-out" (fn []
                       (change-map "data/maps/map.tmx")))

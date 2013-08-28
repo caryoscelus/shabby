@@ -45,14 +45,19 @@
                    :else (StoryDialog. text opts save)))))
 
 (defn event [action]
-      (if (fn? action)
-          (proxy [StoryEvent] []
-                 (trigger []
-                          (let [a (action)]
-                               (if (= a nil)
-                                   false
-                                   a))))
-          action))
+      (cond
+          (fn? action)
+            (proxy [StoryEvent] []
+                    (trigger []
+                            (let [a (action)]
+                                (if (= a nil)
+                                    false
+                                    a))))
+          (nil? action)
+            (proxy [StoryEvent] []
+                   (trigger [] false))
+          :else
+            action))
 
 (defn add-event [ename new-event]
       (let [ne (cond
