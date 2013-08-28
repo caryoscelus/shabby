@@ -168,6 +168,9 @@ public class MapScreen implements Screen, StoryScreen {
         person.update(dt);
     }
     
+    /**
+     * Process click happend on map
+     */
     public void processClick (float x, float y) {
         Vector2 t = screenToMap(new Vector2(x, y)).sub(person.position);
         person.clicked(t.x, t.y);

@@ -33,6 +33,9 @@ import chlorophytum.util.Invokable;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 
+/**
+ * Main class, not much interesting actually..
+ */
 public class Shabby extends Game {
     MapScreen mapScreen = new MapScreen();
     CreditsScreen creditsScreen = new CreditsScreen();

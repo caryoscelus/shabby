@@ -43,6 +43,9 @@ public class MapObjectViewFactory {
     
     public PersonView personView = new PersonView();
     
+    /**
+     * Init!
+     */
     public void init () {
         personView.init();
     }

@@ -30,6 +30,9 @@ import chlorophytum.mapobject.*;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.tiled.*;
 
+/**
+ * Contains moving processing, States and direction..
+ */
 public class ShabbyObject extends MapObject {
     protected static final float DEFAULT_SPEED = 4;
     protected static final float ROAD_BOOST = 1.5f;

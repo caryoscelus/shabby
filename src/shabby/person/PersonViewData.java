@@ -27,10 +27,16 @@ package shabby.person;
 
 import chlorophytum.mapobject.*;
 
+/**
+ * View data for person
+ */
 public class PersonViewData implements MapObjectViewData {
-    Person origin;
+    protected Person origin;
     
-    float tc;
+    /**
+     * Frame counter; should be moved to something more generic
+     */
+    protected float tc;
     
     public PersonViewData (Person person) {
         origin = person;

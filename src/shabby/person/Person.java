@@ -95,6 +95,12 @@ public class Person extends ShabbyObject {
         }
     }
     
+    /**
+     * Process story event assigned to tile.
+     * Note that it probably would be deprecated eventually if using
+     * proper tiled objects will be implemented.
+     * @param tile TiledMapTile containing properties with info for triggering story
+     */
     protected void processStory (TiledMapTile tile) {
         String tname = tile.getProperties().get("name", String.class);
         if (tname != null) {

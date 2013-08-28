@@ -32,7 +32,8 @@ import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.*;
 
 /**
- * View class for person
+ * View class for person.
+ * Should be replaced with scripting..
  */
 public class PersonView implements MapObjectView {
     Texture texture;
