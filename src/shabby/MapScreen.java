@@ -73,26 +73,18 @@ public class MapScreen implements Screen, StoryScreen {
     
     public void init () {
         initRenderer();
-        initScripting();
         initGame();
         initUi();
     }
     
     /**
-     * Init map renderer; TODO: move to map renderer class
+     * Init map stage
      */
     protected void initRenderer () {
         mapStage = new MapStage();
         mapStage.init(TILE_SIZE, TILES_NX, TILES_NY);
         
         MapObjectViewFactory.instance().init();
-    }
-    
-    /**
-     * Init scripting
-     */
-    protected void initScripting () {
-        Scripting.init();
     }
     
     /**

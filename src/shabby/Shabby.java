@@ -25,18 +25,22 @@
 
 package shabby;
 
+import chlorophytum.Scripting;
+import chlorophytum.credits.CreditsScreen;
+
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 
 public class Shabby extends Game {
     MapScreen mapScreen = new MapScreen();
+    CreditsScreen creditsScreen = new CreditsScreen();
     
     @Override
     public void create () {
+        Scripting.init();
         
-        
-        
-        setScreen(mapScreen);
+        setScreen(creditsScreen);
+//         setScreen(mapScreen);
     }
 
     @Override
