@@ -66,6 +66,13 @@ public class Person extends ShabbyObject {
     public void moved () {
         state = State.Run;
         
+        for (com.badlogic.gdx.maps.MapObject object : onMap.checkObjectLayer("events", position)) {
+            if (Boolean.parseBoolean(object.getProperties().get("auto", "", String.class))) {
+                processStory(object);
+            }
+        }
+        
+        // this is deprecated
         TiledMapTile tile = getTile("quests");
         if (tile != null) {
             if (Boolean.parseBoolean(tile.getProperties().get("auto", "", String.class))) {
@@ -107,6 +114,15 @@ public class Person extends ShabbyObject {
             story(tname);
         } else {
             Gdx.app.log("story", "no story name here; ids not supported anymore");
+        }
+    }
+    
+    protected void processStory (com.badlogic.gdx.maps.MapObject object) {
+        String tname = object.getName();
+        if (!tname.isEmpty()) {
+            story(tname);
+        } else {
+            Gdx.app.log("story", "no story name here");
         }
     }
     
