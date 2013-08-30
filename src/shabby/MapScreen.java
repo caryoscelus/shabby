@@ -151,16 +151,16 @@ public class MapScreen implements Screen, StoryScreen {
         // check movement
         float mdx = 0, mdy = 0;
         if (Gdx.input.isKeyPressed(Keys.LEFT)) {
-            mdx += -1*dt;
+            mdx += -1;
         }
         if (Gdx.input.isKeyPressed(Keys.RIGHT)) {
-            mdx += 1*dt;
+            mdx += 1;
         }
         if (Gdx.input.isKeyPressed(Keys.UP)) {
-            mdy += 1*dt;
+            mdy += 1;
         }
         if (Gdx.input.isKeyPressed(Keys.DOWN)) {
-            mdy += -1*dt;
+            mdy += -1;
         }
         
         person.move.x = mdx;
