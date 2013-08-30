@@ -36,14 +36,13 @@ import com.badlogic.gdx.math.*;
  * Should be replaced with scripting..
  */
 public class PersonView implements MapObjectView {
-    Texture texture;
-    Animation defaultSprite;
-    Animation[] spriteRun = new Animation[8];
-    Animation[] spriteStand = new Animation[8];
+    protected Animation defaultSprite;
+    protected Animation[] spriteRun = new Animation[8];
+    protected Animation[] spriteStand = new Animation[8];
     
     @Override
     public void init () {
-        texture = new Texture("data/maps/char-1.png");
+        Texture texture = new Texture("data/maps/char-1.png");
         TextureRegion[][] regions = TextureRegion.split(texture, 32, 32);
         
         defaultSprite = new Animation(0, regions[0][0]);
