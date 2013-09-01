@@ -79,6 +79,6 @@ public class PersonView extends MapObjectView {
         direction = direction/2*2;
         final Animation sprite = spriteT[direction];
         
-        batch.draw(sprite.getKeyFrame(pdata.tc), getX()*32, getY()*32, getWidth()*32, getHeight()*32);
+        batch.draw(sprite.getKeyFrame(pdata.tc), getX(), getY(), getWidth(), getHeight());
     }
 }
