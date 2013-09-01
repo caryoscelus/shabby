@@ -35,13 +35,12 @@ import com.badlogic.gdx.math.*;
  * View class for person.
  * Should be replaced with scripting..
  */
-public class PersonView implements MapObjectView {
-    protected Animation defaultSprite;
-    protected Animation[] spriteRun = new Animation[8];
-    protected Animation[] spriteStand = new Animation[8];
+public class PersonView extends MapObjectView {
+    protected static Animation defaultSprite;
+    protected static Animation[] spriteRun = new Animation[8];
+    protected static Animation[] spriteStand = new Animation[8];
     
-    @Override
-    public void init () {
+    public static void init () {
         Texture texture = new Texture("data/maps/char-1.png");
         TextureRegion[][] regions = TextureRegion.split(texture, 32, 32);
         
@@ -57,8 +56,12 @@ public class PersonView implements MapObjectView {
         }
     }
     
+    public PersonView (MapObjectViewData d) {
+        super(d);
+    }
+    
     @Override
-    public void render (SpriteBatch batch, MapObjectViewData data) {
+    public void draw (SpriteBatch batch, float parentAlpha) {
         PersonViewData pdata = (PersonViewData) data;
         
         final Animation[] spriteT;
@@ -76,10 +79,6 @@ public class PersonView implements MapObjectView {
         direction = direction/2*2;
         final Animation sprite = spriteT[direction];
         
-        final Vector2 position = pdata.origin.position;
-        
-        batch.begin();
-        batch.draw(sprite.getKeyFrame(pdata.tc), position.x, position.y, 2, 2);
-        batch.end();
+        batch.draw(sprite.getKeyFrame(pdata.tc), getX()*32, getY()*32, getWidth()*32, getHeight()*32);
     }
 }

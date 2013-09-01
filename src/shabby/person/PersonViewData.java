@@ -27,6 +27,8 @@ package shabby.person;
 
 import chlorophytum.mapobject.*;
 
+import com.badlogic.gdx.math.Vector2;
+
 /**
  * View data for person
  */
@@ -45,5 +47,15 @@ public class PersonViewData implements MapObjectViewData {
     @Override
     public void update (float dt) {
         tc += dt;
+    }
+    
+    @Override
+    public Vector2 position () {
+        return origin.position;
+    }
+    
+    @Override
+    public Vector2 size () {
+        return new Vector2(2, 2);
     }
 }

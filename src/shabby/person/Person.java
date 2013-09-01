@@ -29,6 +29,7 @@ import shabby.*;
 import shabby.objects.*;
 
 import chlorophytum.story.*;
+import chlorophytum.mapobject.*;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.tiled.*;
@@ -47,7 +48,10 @@ public class Person extends ShabbyObject {
     // gfx state
     public Person () {
         viewData = new PersonViewData(this);
-        view = MapObjectViewFactory.instance().personView;
+    }
+    
+    public MapObjectView newView () {
+        return new PersonView (viewData);
     }
     
     /**

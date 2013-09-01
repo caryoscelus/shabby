@@ -85,7 +85,7 @@ public class MapScreen implements Screen, StoryScreen {
         mapStage = new ChloroMapStage();
         mapStage.init(TILE_SIZE, TILES_NX, TILES_NY);
         
-        MapObjectViewFactory.instance().init();
+        MapObjectViewFactory.init();
     }
     
     /**
