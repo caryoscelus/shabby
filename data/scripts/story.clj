@@ -56,8 +56,8 @@ All my relaxation disappeared right away.."))
      (t "Yeah.."))
  (ln "Gimme beer"
      (fn []
-         (.setActive (get-event "barman") 2 true)
-         (.trigger (t "Gimme cash"))
+         (.setActive (ev "barman") 2 true)
+         (run (t "Gimme cash"))
          true))
  (lnh "Ok, here's your monies"
       (t "Thanks, but i won't give you anything for this.."))

@@ -22,14 +22,14 @@
 ;;  for the parts of Clojure used as well as that of the covered work.}
 
 (ns input
-    (:use [story :only (get-event log)]))
+    (:use [story :only (run log)]))
 
 (import 'com.badlogic.gdx.Input$Keys)
 
 (import 'chlorophytum.Streamer 'chlorophytum.story.Story)
 
 (defn setup-input []
-      (add-key-handler (Input$Keys/F1) (fn [] (.trigger (get-event "help"))))
+      (add-key-handler (Input$Keys/F1) (fn [] (run "help")))
       (add-key-handler (Input$Keys/F2) (fn []
                                            (let [st (Streamer/instance)]
                                                 (if (.isEnabled st)
