@@ -47,19 +47,17 @@ All my relaxation disappeared right away.."))
       false)
  (ln "Not now" nil))))
 
-(bind "bar-out" (fn []
-                      (change-map "data/maps/map.tmx")))
+(bindf "bar-out"
+       (change-map "data/maps/map.tmx"))
 
 (bind "barman" (tr
 "Barman"
 (list
  (ln "Hello"
      (t "Yeah.."))
- (ln "Gimme beer"
-     (fn []
-         (.setActive (ev "barman") 2 true)
-         (run (t "Gimme cash"))
-         true))
+ (lnf "Gimme beer"
+      (.setActive (ev "barman") 2 true)
+      (run (t "Gimme cash")))
  (lnh "Ok, here's your monies"
       (t "Thanks, but i won't give you anything for this.."))
  (ln "..."
