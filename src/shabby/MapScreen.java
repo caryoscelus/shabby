@@ -94,7 +94,6 @@ public class MapScreen implements Screen, StoryScreen {
     protected void initUi () {
         // UI
         Story.instance().screen = this;
-        Story.instance().addObject("self", person);
         storyStage = new StoryStage();
         
         stage = new Stage();
@@ -122,6 +121,7 @@ public class MapScreen implements Screen, StoryScreen {
         person = new Person();
         person.moveTo("data/maps/map.tmx", new Vector2(50, 50));
         Story.instance().init();
+        Story.instance().addObject("self", person);
     }
     
     @Override
