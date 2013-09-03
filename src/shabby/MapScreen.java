@@ -74,8 +74,8 @@ public class MapScreen implements Screen, StoryScreen {
     
     public void init () {
         initRenderer();
-        initGame();
         initUi();
+        initGame();
     }
     
     /**
@@ -233,21 +233,8 @@ public class MapScreen implements Screen, StoryScreen {
     }
     
     
-    // UI
     @Override
-    public void showStory (StoryDialog dialogue) {
-        if (storyStage.show) {
-            hideStory();
-        }
-        
-        storyStage.show = true;
-        
-        storyStage.setupUi(dialogue);
-    }
-    
-    @Override
-    public void hideStory () {
-        storyStage.show = false;
-        storyStage.clear();
+    public void showStory (StoryContext context) {
+        storyStage.setContext(context);
     }
 }
