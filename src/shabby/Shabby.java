@@ -43,7 +43,7 @@ public class Shabby extends Game {
     @Override
     public void create () {
         Scripting.init();
-        UiManager.instance().init();
+        UiManager.instance().loadDefaultSkin();
         
         setScreen(creditsScreen);
         creditsScreen.onExit = new Invokable() {
