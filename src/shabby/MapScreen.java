@@ -119,7 +119,7 @@ public class MapScreen implements Screen, StoryScreen {
      */
     protected void initGame () {
         person = new Person();
-        person.moveTo("data/maps/map.tmx", new Vector2(50, 50));
+        person.moveTo("map", new Vector2(50, 50));
         Story.instance().init();
         Story.instance().addObject("self", person);
     }

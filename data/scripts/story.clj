@@ -43,12 +43,12 @@ All my relaxation disappeared right away.."))
 "Want to go to the bar?"
 (list
  (lnf "Sure"
-      (change-map "data/maps/bar.tmx")
+      (change-map "bar")
       false)
  (ln "Not now" nil))))
 
 (bindf "bar-out"
-       (change-map "data/maps/map.tmx"))
+       (change-map "map"))
 
 (bind "barman" (tr
 "Barman"

@@ -27,6 +27,7 @@ package shabby;
 
 import chlorophytum.Scripting;
 import chlorophytum.UiManager;
+import chlorophytum.Loader;
 import chlorophytum.credits.CreditsScreen;
 import chlorophytum.util.Invokable;
 
@@ -42,6 +43,7 @@ public class Shabby extends Game {
     
     @Override
     public void create () {
+        Loader.instance().setMapPath("data/maps", ".tmx");
         Scripting.init();
         UiManager.instance().loadDefaultSkin();
         
