@@ -163,8 +163,8 @@ public class MapScreen implements Screen, StoryScreen {
             mdy += -1;
         }
         
-        person.move.x = mdx;
-        person.move.y = mdy;
+        person.wantMove.x = mdx;
+        person.wantMove.y = mdy;
         person.update(dt);
     }
     

@@ -47,8 +47,8 @@ public class ShabbyObject extends MapObject {
     public void update(float dt) {
         super.update(dt);
         
-        if (move.x != 0 || move.y != 0) {
-            int angle = ((int) move.angle()/45) * 45;
+        if (wantMove.x != 0 || wantMove.y != 0) {
+            int angle = ((int) wantMove.angle()/45) * 45;
             float dx = (float) Math.cos(angle*Math.PI/180) * dt * DEFAULT_SPEED;
             float dy = (float) Math.sin(angle*Math.PI/180) * dt * DEFAULT_SPEED;
             
