@@ -5,7 +5,10 @@ Simple game using Chlorophytum engine (https://github.com/caryoscelus/chlorophyt
 
 Originally written for learning; maybe will grow into something bigger later.
 
-Current status: early development, but runnable
+Current status: development frozen; early development, but runnable
+
+It is possible that development of game itself will be resumed, but most likely
+using enother tech.
 
 Dependencies
 ------------
